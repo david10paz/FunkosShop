@@ -25,6 +25,8 @@ const String passDistintos = "Contraseñas no coinciden";
 const String nombreVacio = "Por favor rellena tu nombre";
 const String numeroVacio = "Por favor introduce tu numero de telefono";
 const String dirVacio = "Por favor introduce tu dirección";
+const String noExiste = "No existe dicho usuario";
+const String noPass = "La contraseña no pertenece al usuario";
 
 final otpInputDecoration = InputDecoration(
   contentPadding:

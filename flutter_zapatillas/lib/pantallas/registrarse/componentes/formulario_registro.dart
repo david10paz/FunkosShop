@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_zapatillas/componentes/boton.dart';
@@ -14,6 +15,7 @@ class FormularioRegistar extends StatefulWidget {
 
 class _FormularioRegistarState extends State<FormularioRegistar> {
   final _formKey = GlobalKey<FormState>();
+  
     String email;
     String pass;
     String passConfirmar;
@@ -34,6 +36,15 @@ class _FormularioRegistarState extends State<FormularioRegistar> {
     }
 
 
+  //Firebase
+  Future<void> _crearUsuario() async{
+    try{
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email,password: pass);
+    }on FirebaseAuthException catch(e){
+      print("Error");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -53,6 +64,7 @@ class _FormularioRegistarState extends State<FormularioRegistar> {
               if(_formKey.currentState.validate()){
                 _formKey.currentState.save();
                 Navigator.pushNamed(context, PantallaRegistarseCompletar.rutaNombre);
+                _crearUsuario();
               }
             }
           ),

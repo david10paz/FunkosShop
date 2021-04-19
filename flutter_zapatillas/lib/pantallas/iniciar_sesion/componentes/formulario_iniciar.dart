@@ -1,11 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../componentes/boton.dart';
 import '../../../componentes/formulario_error.dart';
+import '../../../design/constantes.dart';
 import '../../principal/pantalla_principal.dart';
 
 import '../../../design/config_tam.dart';
-import '../../../design/constantes.dart';
 import '../../pass_olvidado/pantalla_pass_olvidado.dart';
 
 
@@ -16,6 +17,7 @@ class FormularioIniciar extends StatefulWidget {
 
 class _FormularioIniciarState extends State<FormularioIniciar> {
    final _formKey = GlobalKey<FormState>();
+
     String email;
     String pass;
     bool recordar = false;
@@ -34,6 +36,36 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
           errores.remove(error);
         });
     }
+
+  
+  //Firebase
+  Future<void> _comprobarUsuario() async{
+    if(_formKey.currentState.validate()){
+      _formKey.currentState.save();
+      try{
+        UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email,password: pass);
+        Navigator.pushNamed(context, PantallaPrincipal.rutaNombre);
+      }on FirebaseAuthException catch(e){
+        
+        if (e.code == 'user-not-found') {
+          anadirError(error: noExiste);
+          return "";
+        } else {
+          quitarError(error: noExiste);
+        }
+
+        if (e.code == 'wrong-password') {
+          anadirError(error: noPass);
+          return "";
+        }
+        else{
+          quitarError(error: noPass);
+        }
+
+        return null;
+      }
+    }
+  }
 
 
   @override
@@ -69,11 +101,10 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
           SizedBox(height: getProporcionalPantallaAlto(25),),
           Boton(
             texto:"ENTRAR", 
-            pulsar:(){
-              if(_formKey.currentState.validate()){
-                _formKey.currentState.save();
-                Navigator.pushNamed(context, PantallaPrincipal.rutaNombre);
-              }
+            pulsar:() async{
+              
+                _comprobarUsuario();
+              
             }
           ),
           SizedBox(height: getProporcionalPantallaAlto(25),),
@@ -91,7 +122,7 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
         if(value.isNotEmpty){
           quitarError(error: passVacio);
         }
-        else if(value.length >= 8){
+        if(value.length >= 8){
           quitarError(error: passCorto);
         }
         return null;
@@ -101,7 +132,7 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
           anadirError(error: passVacio);
           return "";
         }
-        else if(value.length < 8){
+        if(value.length < 8){
           anadirError(error: passCorto);
           return "";
         }
@@ -135,7 +166,7 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
         if(value.isNotEmpty){
           quitarError(error: emailVacio);
         }
-        else if(emailObligaciones.hasMatch(value)){
+        if(emailObligaciones.hasMatch(value)){
           quitarError(error: emailError);
         }
         return null;
@@ -145,7 +176,7 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
           anadirError(error: emailVacio);
           return "";
         }
-        else if(!emailObligaciones.hasMatch(value)){
+        if(!emailObligaciones.hasMatch(value)){
           anadirError(error: emailError);
           return "";
         }

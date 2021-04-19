@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pantallas/intro/pantalla_intro.dart';
+import 'package:flutter_zapatillas/pantallas/db/db.dart';
 import 'design/theme.dart';
 import 'rutas.dart';
 
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Bambas Shop',
       theme: theme(),
-      initialRoute: PantallaIntro.rutaNombre,
+      initialRoute: FirebaseInitial.rutaNombre,
       routes: rutas,
     );
   }
