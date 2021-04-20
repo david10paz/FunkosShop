@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_zapatillas/pantallas/principal/main.dart';
 import '../../../componentes/boton.dart';
 import '../../../componentes/formulario_error.dart';
 import '../../../design/constantes.dart';
-import '../../principal/pantalla_principal.dart';
 
 import '../../../design/config_tam.dart';
 import '../../pass_olvidado/pantalla_pass_olvidado.dart';
@@ -102,9 +102,7 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
           Boton(
             texto:"ENTRAR", 
             pulsar:() async{
-              
                 _comprobarUsuario();
-              
             }
           ),
           SizedBox(height: getProporcionalPantallaAlto(25),),
