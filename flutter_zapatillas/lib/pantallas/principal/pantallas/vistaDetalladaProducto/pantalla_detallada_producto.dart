@@ -28,13 +28,6 @@ class PantallaDetalladaProductos extends StatelessWidget {
         ),
         onPressed: () => Navigator.pop(context),
       ),
-      actions: <Widget>[
-        IconButton(
-          icon: SvgPicture.asset("assets/icons/carrito.svg"),
-          onPressed: () {},
-        ),
-        SizedBox(width: 10)
-      ],
     );
   }
 }

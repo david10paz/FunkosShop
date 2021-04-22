@@ -48,7 +48,7 @@ class PrimerPlano extends StatelessWidget {
                 child: Hero(
                   tag: "${producto.id}",
                   child: Image.asset(
-                    producto.imagen,
+                    "assets/images/productos/${producto.imagen}",
                     fit: BoxFit.fill,
                   ),
                 ),

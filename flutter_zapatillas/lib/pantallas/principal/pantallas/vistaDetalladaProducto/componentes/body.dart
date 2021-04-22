@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zapatillas/pantallas/principal/listaProductos/productos.dart';
+import 'package:flutter_zapatillas/pantallas/principal/pantallas/vistaDetalladaProducto/componentes/anadir_carrito.dart';
 
 
-import 'contador_cantidad.dart';
 import 'marca_tamano.dart';
-import 'anadir_carrito.dart';
 import 'descripcion.dart';
 import 'primer_plano.dart';
 
@@ -45,9 +44,7 @@ class Body extends StatelessWidget {
                       SizedBox(height: 10),
                       Descripcion(producto: producto),
                       SizedBox(height: 10),
-                      ContadorCantidad(),
-                      SizedBox(height: 10),
-                      AnadirCarro(producto: producto)
+                      //AnadirCarrito()
                     ],
                   ),
                 ),

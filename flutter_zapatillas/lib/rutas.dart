@@ -16,5 +16,6 @@ final Map<String, WidgetBuilder> rutas = {
   PantallaRegistrarse.rutaNombre: (context) => PantallaRegistrarse(),
   PantallaRegistarseCompletar.rutaNombre: (context) => PantallaRegistarseCompletar(),
   PantallaPrincipal.rutaNombre: (context) => PantallaPrincipal(),
-  FirebaseInitial.rutaNombre: (context) => FirebaseInitial()
+  FirebaseInitial.rutaNombre: (context) => FirebaseInitial(),
+  
 };
