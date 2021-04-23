@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zapatillas/pantallas/principal/listaProductos/productos.dart';
 
+import '../../componentes/boton.dart';
+
 class Cart extends StatefulWidget {
   final List<Productos> _cart;
 
@@ -214,11 +216,9 @@ class _CartState extends State<Cart> {
                 height: 100,
                 width: 200,
                 padding: EdgeInsets.only(top: 50),
-                child: RaisedButton(
-                  textColor: Colors.white,
-                  color: Colors.green,
-                  child: Text("PAGAR"),
-                  onPressed: () => {
+                child: Boton(
+                  texto: "PAGAR",
+                  pulsar: () => {
                    /*showDialog( 
                       
                         context: context,
@@ -233,9 +233,6 @@ class _CartState extends State<Cart> {
                             ))
                             */
                   },
-                  shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(30.0),
-                  ),
                 ),
               ),
             ],

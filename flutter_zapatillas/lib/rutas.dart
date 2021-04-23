@@ -9,7 +9,7 @@ import 'pantallas/intro/pantalla_intro.dart';
 import 'pantallas/registrarse_satisfactorio/pantalla_login_satisfactorio.dart';
 
 final Map<String, WidgetBuilder> rutas = {
-  PantallaIntro.rutaNombre: (context) => PantallaIntro(),
+  
   PantallaSesion.rutaNombre: (context) => PantallaSesion(),
   PantallaPassOlvidado.rutaNombre: (context) => PantallaPassOlvidado(),
   PantallaRegistrarseSatisfactorio.rutaNombre: (context) => PantallaRegistrarseSatisfactorio(),
@@ -17,5 +17,5 @@ final Map<String, WidgetBuilder> rutas = {
   PantallaRegistarseCompletar.rutaNombre: (context) => PantallaRegistarseCompletar(),
   PantallaPrincipal.rutaNombre: (context) => PantallaPrincipal(),
   FirebaseInitial.rutaNombre: (context) => FirebaseInitial(),
-  
+  PantallaIntro.rutaNombre: (context) => PantallaIntro(),
 };
