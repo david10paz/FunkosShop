@@ -38,10 +38,20 @@ class _FormularioRegistarState extends State<FormularioRegistar> {
 
   //Firebase
   Future<void> _crearUsuario() async{
-    try{
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email,password: pass);
-    }on FirebaseAuthException catch(e){
-      print("Error");
+    if(_formKey.currentState.validate()){
+      _formKey.currentState.save();
+      try{
+        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email,password: pass);
+        Navigator.pushNamed(context, PantallaRegistarseCompletar.rutaNombre);
+      }on FirebaseAuthException catch(e){
+        if (e.code == 'email-already-in-use') {
+            anadirError(error: existeUsuario);
+            return "";
+          } else {
+            quitarError(error: existeUsuario);
+          }
+        return null;
+      }
     }
   }
 
@@ -61,11 +71,7 @@ class _FormularioRegistarState extends State<FormularioRegistar> {
           Boton(
             texto:"Continuar", 
             pulsar:(){
-              if(_formKey.currentState.validate()){
-                _formKey.currentState.save();
-                Navigator.pushNamed(context, PantallaRegistarseCompletar.rutaNombre);
                 _crearUsuario();
-              }
             }
           ),
           SizedBox(height: getProporcionalPantallaAlto(25),),
@@ -83,17 +89,18 @@ class _FormularioRegistarState extends State<FormularioRegistar> {
         if(value.isNotEmpty){
           quitarError(error: passVacio);
         }
-        else if(value.isNotEmpty && pass == passConfirmar){
+        if(value.isNotEmpty && pass == passConfirmar){
           quitarError(error: passDistintos);
         }
         passConfirmar = value;
+        return null;
       },
       validator: (value){
         if(value.isEmpty){
           anadirError(error: passVacio);
           return "";
         }
-        else if((pass != value)){
+        if((pass != value)){
           anadirError(error: passDistintos);
           return "";
         }
@@ -128,17 +135,18 @@ class _FormularioRegistarState extends State<FormularioRegistar> {
         if(value.isNotEmpty){
           quitarError(error: passVacio);
         }
-        else if(value.length >= 8){
+        if(value.length >= 8){
           quitarError(error: passCorto);
         }
         pass = value;
+        return null;
       },
       validator: (value){
         if(value.isEmpty){
           anadirError(error: passVacio);
           return "";
         }
-        else if(value.length < 8){
+        if(value.length < 8){
           anadirError(error: passCorto);
           return "";
         }
@@ -172,7 +180,7 @@ class _FormularioRegistarState extends State<FormularioRegistar> {
         if(value.isNotEmpty){
           quitarError(error: emailVacio);
         }
-        else if(emailObligaciones.hasMatch(value)){
+        if(emailObligaciones.hasMatch(value)){
           quitarError(error: emailError);
         }
         return null;
@@ -182,7 +190,7 @@ class _FormularioRegistarState extends State<FormularioRegistar> {
           anadirError(error: emailVacio);
           return "";
         }
-        else if(!emailObligaciones.hasMatch(value)){
+        if(!emailObligaciones.hasMatch(value)){
           anadirError(error: emailError);
           return "";
         }

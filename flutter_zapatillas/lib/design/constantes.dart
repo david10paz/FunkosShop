@@ -27,6 +27,7 @@ const String numeroVacio = "Por favor introduce tu numero de telefono";
 const String dirVacio = "Por favor introduce tu dirección";
 const String noExiste = "No existe dicho usuario";
 const String noPass = "La contraseña no pertenece al usuario";
+const String existeUsuario = "Esta cuenta ya se encuentra registrada";
 
 final otpInputDecoration = InputDecoration(
   contentPadding:

@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_zapatillas/design/constantes.dart';
+import 'package:flutter_zapatillas/pantallas/pago/main.dart';
 import 'package:flutter_zapatillas/pantallas/principal/listaProductos/productos.dart';
+import 'package:flutter_zapatillas/pantallas/principal/pantallas/vistaPrincipalProductos/pantalla_principal_productos.dart';
 
 import '../../componentes/boton.dart';
 
 class Cart extends StatefulWidget {
+  static String rutaNombre = "/carro";
   final List<Productos> _cart;
 
   Cart(this._cart);
@@ -24,17 +28,20 @@ class _CartState extends State<Cart> {
   Container pagoTotal(List<Productos> _cart) {
     return Container(
       alignment: Alignment.centerRight,
-      padding: EdgeInsets.only(left: 120),
+      padding: EdgeInsets.only(left: 90),
+      decoration: BoxDecoration(
+        color: Colors.indigo,
+        borderRadius: BorderRadius.circular(18)),
       height: 70,
-      width: 400,
-      color: Colors.grey[200],
+      width: 300,
       child: Row(
         children: <Widget>[
-          Text("Total:  \$${valorTotal(_cart)}",
+          Text("Total:  ${valorTotal(_cart)} €",
               style: new TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 14.0,
-                  color: Colors.black))
+                  fontFamily: 'Marker',
+                  fontSize: 16.0,
+                  color: Colors.white))
         ],
       ),
     );
@@ -53,30 +60,28 @@ class _CartState extends State<Cart> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.restaurant_menu),
-            onPressed: null,
-            color: Colors.white,
-          )
-        ],
-        title: Text('Detalle',
+        title: Text('CARRO DE LA COMPRA',
             style: new TextStyle(
+                fontFamily: 'Marker',
                 fontWeight: FontWeight.bold,
-                fontSize: 14.0,
-                color: Colors.black)),
+                fontSize: 16.0,
+                color: Colors.white)),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => PantallaPrincipalProductos(),
+                ),
+              );
             setState(() {
               _cart.length;
             });
           },
           color: Colors.white,
         ),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.indigo,
       ),
       body: GestureDetector(
           onVerticalDragUpdate: (details) {
@@ -99,72 +104,76 @@ class _CartState extends State<Cart> {
                 itemBuilder: (context, index) {
                   final String imagen = _cart[index].imagen;
                   var item = _cart[index];
-                  //item.cantidad = 0;
                   return Column(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 2.0),
+                        padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
                         child: Column(
                           children: <Widget>[
                             Row(
                               children: <Widget>[
                                 Container(
-                                  width: 150,
-                                  height: 150,
+                                  width: 120,
+                                  height: 120,
+                                  decoration: BoxDecoration(
+                                    color: item.color,
+                                    borderRadius: BorderRadius.circular(18)),
                                   child: new Image.asset(
                                       "assets/images/productos/$imagen",
                                       fit: BoxFit.contain),
                                 ),
+                                
                                 Column(
                                   children: <Widget>[
-                                    Text(item.titulo,
+                                    Padding(
+                                    padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                                    child:
+                                      Text(item.titulo + "\n" + item.precio.toString() + " €",
+                                        textAlign: TextAlign.center,
                                         style: new TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 16.0,
-                                            color: Colors.black)),
+                                            fontSize: 18.0,
+                                            fontFamily: 'Marker',
+                                            color: item.color,
+                                        )
+                                      ),
+                                    ),
                                     Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                      mainAxisAlignment:MainAxisAlignment.center,
                                       children: <Widget>[
                                         Container(
                                           width: 120,
-                                          height: 40,
+                                          height: 35,
                                           decoration: BoxDecoration(
-                                              color: Colors.red[600],
+                                              color: colorPrincipal,
                                               boxShadow: [
                                                 BoxShadow(
                                                   blurRadius: 6.0,
-                                                  color: Colors.blue[400],
-                                                  offset: Offset(0.0, 1.0),
+                                                  color: Colors.indigo,
+                                                  offset: Offset(0.0, 2.0),
                                                 )
                                               ],
                                               borderRadius: BorderRadius.all(
                                                 Radius.circular(50.0),
                                               )),
-                                          margin: EdgeInsets.only(top: 20.0),
-                                          padding: EdgeInsets.all(2.0),
+                                          margin: EdgeInsets.only(top: 20.0, left: 20),
                                           child: new Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                             children: <Widget>[
-                                              SizedBox(
-                                                height: 8.0,
-                                              ),
                                               IconButton(
                                                 icon: Icon(Icons.remove),
                                                 onPressed: () {
                                                   _removeProduct(index);
                                                   valorTotal(_cart);
-                                                  // print(_cart);
                                                 },
-                                                color: Colors.yellow,
+                                                color: Colors.white,
                                               ),
                                               Text('${_cart[index].cantidad}',
                                                   style: new TextStyle(
                                                       fontWeight:
                                                           FontWeight.bold,
-                                                      fontSize: 22.0,
+                                                      fontSize: 20.0,
                                                       color: Colors.white)),
                                               IconButton(
                                                 icon: Icon(Icons.add),
@@ -172,12 +181,8 @@ class _CartState extends State<Cart> {
                                                   _addProduct(index);
                                                   valorTotal(_cart);
                                                 },
-                                                color: Colors
-                                                    .yellow, // print(_cart);
+                                                color: Colors.white,
                                               ),
-                                              SizedBox(
-                                                height: 8.0,
-                                              )
                                             ],
                                           ),
                                         )
@@ -185,14 +190,29 @@ class _CartState extends State<Cart> {
                                     )
                                   ],
                                 ),
-                                SizedBox(
-                                  width: 38.0,
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 30, top: 10, bottom: 10),
+                                  child:
+                                  Column(
+                                    children: <Widget>[
+                                      IconButton(
+                                        icon: Icon(Icons.remove_shopping_cart, size: 30),
+                                        onPressed: () {
+                                          _quitarProduct(index);
+                                          valorTotal(_cart);
+                                          if (productsCarrito.isEmpty){
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) => PantallaPrincipalProductos(),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        color: Colors.red,
+                                      ),
+                                    ]
+                                  ),
                                 ),
-                                Text(item.precio.toString(),
-                                    style: new TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 24.0,
-                                        color: Colors.black))
                               ],
                             ),
                           ],
@@ -219,19 +239,11 @@ class _CartState extends State<Cart> {
                 child: Boton(
                   texto: "PAGAR",
                   pulsar: () => {
-                   /*showDialog( 
-                      
-                        context: context,
-                        builder: (BuildContext context) => FancyDialog(
-                              title: "ACEPTA PAGAR LA COMPRA",
-                              descreption: "Bien pues pague :), Click OK",
-                              animationType: FancyAnimation.BOTTOM_TOP,
-                              theme: FancyTheme.FANCY,
-                              gifPath:
-                                  FancyGif.MOVE_FORWARD, //'./assets/walp.png',
-                              okFun: () => {print("it's working :)")},
-                            ))
-                            */
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PantallaPagoPrincipal(),
+                      ),
+                    ),
                   },
                 ),
               ),
@@ -251,6 +263,13 @@ class _CartState extends State<Cart> {
       if(_cart[index].cantidad > 1){
           _cart[index].cantidad--;
       }
+    });
+  }
+
+  _quitarProduct(int index) {
+    setState(() {
+      _cart[index].cantidad = 1;
+      _cart.remove(productsCarrito[index]);
     });
   }
 }

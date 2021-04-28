@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zapatillas/pantallas/carro/body.dart';
+import 'package:flutter_zapatillas/pantallas/carro/carro.dart';
 import 'package:flutter_zapatillas/pantallas/principal/pantallas/vistaDetalladaProducto/pantalla_detallada_producto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
             )
           ],
         ),
-        body: _cuadroProductos()
+        body: _cuadroProductos() 
       );
     }
   
@@ -104,6 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
         itemCount: productsLista.length,
         
         itemBuilder: (context, index){
+          
           final String imagen = productsLista[index].imagen;
           var item = productsLista[index];
           
@@ -122,8 +123,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                        height: 100,
-                        width: 160,
+                        height: 80,
+                        width: 120,
                         decoration: BoxDecoration(
                           color: item.color,
                           borderRadius: BorderRadius.circular(18)),

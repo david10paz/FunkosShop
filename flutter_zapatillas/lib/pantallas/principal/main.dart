@@ -14,6 +14,7 @@ class PantallaPrincipal extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("BIENVENIDO!", textAlign: TextAlign.center),
+        centerTitle: true,
         automaticallyImplyLeading: false,
         actions: <Widget>[
             Padding(

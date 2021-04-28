@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../componentes/boton.dart';
@@ -13,12 +15,15 @@ class FormularioRegistrarCompletar extends StatefulWidget {
       _FormularioRegistrarCompletarState();
 }
 
-class _FormularioRegistrarCompletarState
-    extends State<FormularioRegistrarCompletar> {
+class _FormularioRegistrarCompletarState extends State<FormularioRegistrarCompletar> {
   final _formKey = GlobalKey<FormState>();
+
+  TextEditingController _nombreController = TextEditingController();
+  TextEditingController _dirController = TextEditingController();
+  TextEditingController _numeroController = TextEditingController();
+
   final List<String> errores = [];
   String nombre;
-  String apellidos;
   String numero;
   String dir;
 
@@ -34,6 +39,16 @@ class _FormularioRegistrarCompletarState
       setState(() {
         errores.remove(error);
       });
+  }
+
+
+  //Firebase
+  Future<void> saveDatosUsuario(String nombre, String direccion, String numero) async{
+   CollectionReference users = FirebaseFirestore.instance.collection("Usuarios");
+   FirebaseAuth auth = FirebaseAuth.instance;
+   String uid = auth.currentUser.uid.toString();
+   String email = auth.currentUser.email.toString();
+   users.add({'uid':uid ,'email': email, 'nombre': nombre, 'direccion': direccion, 'telefono': numero});
   }
 
   @override
@@ -53,6 +68,7 @@ class _FormularioRegistrarCompletarState
             texto: "Continuar",
             pulsar: () {
               if (_formKey.currentState.validate()) {
+                saveDatosUsuario(_nombreController.text, _dirController.value.text, _numeroController.text);
                 Navigator.pushNamed(context, PantallaRegistrarseSatisfactorio.rutaNombre);
               }
             },
@@ -64,6 +80,7 @@ class _FormularioRegistrarCompletarState
 
   TextFormField buildTextFormFieldNombre() {
     return TextFormField(
+      controller: _nombreController,
       onSaved: (newValue) => nombre = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
@@ -98,6 +115,7 @@ class _FormularioRegistrarCompletarState
 
   TextFormField buildTextFormFieldNumero() {
     return TextFormField(
+      controller: _numeroController,
       onSaved: (newValue) => numero = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
@@ -132,6 +150,7 @@ class _FormularioRegistrarCompletarState
 
   TextFormField buildTextFormFieldDir() {
     return TextFormField(
+      controller: _dirController,
       onSaved: (newValue) => dir = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
