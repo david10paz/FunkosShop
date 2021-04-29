@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_zapatillas/pantallas/db/db.dart';
-import 'package:flutter_zapatillas/pantallas/pago/main.dart';
 import 'package:flutter_zapatillas/pantallas/principal/main.dart';
 import 'pantallas/iniciar_sesion/pantalla_sesion.dart';
 import 'pantallas/pass_olvidado/pantalla_pass_olvidado.dart';
@@ -20,5 +19,4 @@ final Map<String, WidgetBuilder> rutas = {
   PantallaPrincipal.rutaNombre: (context) => PantallaPrincipal(),
   FirebaseInitial.rutaNombre: (context) => FirebaseInitial(),
   PantallaIntro.rutaNombre: (context) => PantallaIntro(),
-  PantallaPagoPrincipal.rutaNombre: (context) => PantallaPagoPrincipal(),
 };

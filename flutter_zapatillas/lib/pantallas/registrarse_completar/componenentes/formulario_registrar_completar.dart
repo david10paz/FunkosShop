@@ -48,7 +48,7 @@ class _FormularioRegistrarCompletarState extends State<FormularioRegistrarComple
    FirebaseAuth auth = FirebaseAuth.instance;
    String uid = auth.currentUser.uid.toString();
    String email = auth.currentUser.email.toString();
-   users.add({'uid':uid ,'email': email, 'nombre': nombre, 'direccion': direccion, 'telefono': numero});
+   users.doc(uid).set({'uid':uid ,'email': email, 'nombre': nombre, 'direccion': direccion, 'telefono': numero});
   }
 
   @override

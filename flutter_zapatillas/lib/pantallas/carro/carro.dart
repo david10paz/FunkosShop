@@ -1,9 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zapatillas/design/constantes.dart';
-import 'package:flutter_zapatillas/pantallas/pago/main.dart';
+import 'package:flutter_zapatillas/pantallas/pago/pantalla_pago.dart';
 import 'package:flutter_zapatillas/pantallas/principal/listaProductos/productos.dart';
 import 'package:flutter_zapatillas/pantallas/principal/pantallas/vistaPrincipalProductos/pantalla_principal_productos.dart';
+import 'package:flutter_zapatillas/pantallas/resumen/resumen_pedido.dart';
+
 
 import '../../componentes/boton.dart';
 
@@ -234,14 +238,14 @@ class _CartState extends State<Cart> {
               ),
               Container(
                 height: 100,
-                width: 200,
+                width: 400,
                 padding: EdgeInsets.only(top: 50),
                 child: Boton(
-                  texto: "PAGAR",
+                  texto: "Continuar con el pago",
                   pulsar: () => {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => PantallaPagoPrincipal(),
+                        builder: (context) => ResumenPedido(FirebaseAuth.instance.currentUser.uid.toString()),
                       ),
                     ),
                   },
