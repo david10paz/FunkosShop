@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_zapatillas/pantallas/principal/listaProductos/productos.dart';
 import 'package:flutter_zapatillas/pantallas/principal/main.dart';
 import '../../../componentes/boton.dart';
 import '../../../componentes/formulario_error.dart';
@@ -196,6 +197,8 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
             height: getProporcionalPantallaAncho(18)),
         ),
       ),   
+        productsCarrito.clear();
+      },
     );
   }
 }

@@ -1,9 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zapatillas/design/constantes.dart';
-import 'package:flutter_zapatillas/pantallas/pago/pantalla_pago.dart';
 import 'package:flutter_zapatillas/pantallas/principal/listaProductos/productos.dart';
 import 'package:flutter_zapatillas/pantallas/principal/pantallas/vistaPrincipalProductos/pantalla_principal_productos.dart';
 import 'package:flutter_zapatillas/pantallas/resumen/resumen_pedido.dart';
@@ -117,8 +115,8 @@ class _CartState extends State<Cart> {
                             Row(
                               children: <Widget>[
                                 Container(
-                                  width: 120,
-                                  height: 120,
+                                  width: 110,
+                                  height: 110,
                                   decoration: BoxDecoration(
                                     color: item.color,
                                     borderRadius: BorderRadius.circular(18)),
@@ -136,7 +134,7 @@ class _CartState extends State<Cart> {
                                         textAlign: TextAlign.center,
                                         style: new TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 18.0,
+                                            fontSize: 16.0,
                                             fontFamily: 'Marker',
                                             color: item.color,
                                         )
@@ -195,12 +193,12 @@ class _CartState extends State<Cart> {
                                   ],
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 30, top: 10, bottom: 10),
+                                  padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
                                   child:
                                   Column(
                                     children: <Widget>[
                                       IconButton(
-                                        icon: Icon(Icons.remove_shopping_cart, size: 30),
+                                        icon: Icon(Icons.remove_shopping_cart, size: 28),
                                         onPressed: () {
                                           _quitarProduct(index);
                                           valorTotal(_cart);

@@ -16,7 +16,7 @@ class Body extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: SizeConfig.pantallaAltura * 0.03),
+                SizedBox(height: SizeConfig.pantallaAltura * 0.15),
                 Text("Completa tu perfil", style: cabeceraStyle),
                 Text(
                   "Completa detenidamente cada campo \npersonal solicitado.",

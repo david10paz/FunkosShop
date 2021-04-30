@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_zapatillas/design/config_tam.dart';
 import 'package:flutter_zapatillas/design/constantes.dart';
+import 'package:flutter_zapatillas/pantallas/carro/carro.dart';
+import 'package:flutter_zapatillas/pantallas/iniciar_sesion/pantalla_sesion.dart';
 import 'package:flutter_zapatillas/pantallas/pago/pantalla_pago.dart';
+import 'package:flutter_zapatillas/pantallas/principal/listaProductos/productos.dart';
+
 
 class ResumenPedido extends StatelessWidget {
   final String documentId;
@@ -42,6 +46,23 @@ class ResumenPedido extends StatelessWidget {
               Map<String, dynamic> data = snapshot.data.data();
               return 
               Scaffold(
+                appBar: AppBar(
+                  title: Text('Resumen de Pedido',
+                      style: new TextStyle(
+                          fontFamily: 'Marker',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                          color: Colors.white)),
+                  centerTitle: true,
+                  leading: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    color: Colors.white,
+                  ),
+                  backgroundColor: Colors.indigo,
+                ),
                 body: Container(
                   child:SingleChildScrollView(
                         child: Column(
@@ -84,11 +105,7 @@ class ResumenPedido extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => CreditCardPage(),
-                                  ),
-                                );
+                                dialogoConfirmar(context);
                               },
                             ),
                             SizedBox(height: getProporcionalPantallaAlto(20)),
@@ -111,7 +128,7 @@ class ResumenPedido extends StatelessWidget {
                 ),
               );
             }
-            return Text("loading");
+            return Text("Cargando..");
           },
         ),
       ),
@@ -144,10 +161,12 @@ class ResumenPedido extends StatelessWidget {
                 onPressed: () {
                   submitAction(context);
                   Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ResumenPedido(FirebaseAuth.instance.currentUser.uid.toString()),
-                      ),
-                    );
+                    MaterialPageRoute(
+                      builder: (context) => 
+                       encabezadovistaPago(context)
+                    ),
+                  );
+                  mensajeDatosActualizados(context);
                 },
                 child: Text('Actualizar'),
               ),
@@ -158,6 +177,71 @@ class ResumenPedido extends StatelessWidget {
                 child: Text('Cancelar'),
               )
             ],
+          );
+        });
+  }
+
+  dialogoConfirmar(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('¿Confirmas?'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => 
+                      encabezadovistaPago(context)
+                    ),
+                  );
+                },
+                child: Text('Proceder'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Cancelar'),
+              )
+            ],
+          );
+        });
+  }
+
+  Widget encabezadovistaPago(BuildContext context) {
+    return 
+      Scaffold(
+        appBar: AppBar(
+          title: Text("PROCEDAMOS AL PAGO!", textAlign: TextAlign.center),
+          centerTitle: true,
+          automaticallyImplyLeading: false,
+          actions: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child:GestureDetector( 
+                  onTap: () async {
+                  productsCarrito.clear();
+                  Navigator.of(context).pushNamedAndRemoveUntil(PantallaSesion.rutaNombre, (Route<dynamic> route) => false);
+                  await FirebaseAuth.instance.signOut();
+                }, 
+                child: Icon(Icons.logout, size:38 )) ,
+                ),
+              ],
+          
+          leading: SizedBox(),
+        ),
+        body:CreditCardPage(),
+      );
+  }
+
+  mensajeDatosActualizados(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return SimpleDialog(
+            title: Text('Editados los campos introducidos.'),
           );
         });
   }

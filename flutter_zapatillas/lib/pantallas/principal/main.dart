@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_zapatillas/pantallas/iniciar_sesion/pantalla_sesion.dart';
 import 'package:flutter_zapatillas/pantallas/principal/pantallas/vistaPrincipalProductos/pantalla_principal_productos.dart';
 
-import '../intro/pantalla_intro.dart';
 import 'listaProductos/productos.dart';
 
 
@@ -22,7 +22,7 @@ class PantallaPrincipal extends StatelessWidget {
               child:GestureDetector( 
                 onTap: () async {
                 productsCarrito.clear();
-                 Navigator.of(context).pushNamedAndRemoveUntil(PantallaIntro.rutaNombre, (Route<dynamic> route) => false);
+                 Navigator.of(context).pushNamedAndRemoveUntil(PantallaSesion.rutaNombre, (Route<dynamic> route) => false);
                  await FirebaseAuth.instance.signOut();
               }, 
               child: Icon(Icons.logout, size:38 )) ,

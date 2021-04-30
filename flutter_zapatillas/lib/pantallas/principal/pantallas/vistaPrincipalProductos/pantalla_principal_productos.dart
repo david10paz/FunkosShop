@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_zapatillas/design/config_tam.dart';
 import 'package:flutter_zapatillas/pantallas/carro/carro.dart';
+import 'package:flutter_zapatillas/pantallas/iniciar_sesion/pantalla_sesion.dart';
 import 'package:flutter_zapatillas/pantallas/principal/pantallas/vistaDetalladaProducto/pantalla_detallada_producto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -45,7 +47,18 @@ class _MyHomePageState extends State<MyHomePage> {
       productsCarrito;
     }
 
-  //Firebase
+  //Firebase ELIMINAR1
+  Future<void> eliminarUsuarioAuth() async{
+   auth.currentUser.delete();
+  }
+  //Firebase ELIMINAR2
+  Future<void> eliminarUsuarioCol() async{
+   CollectionReference users = FirebaseFirestore.instance.collection("Usuarios");
+   String uid = auth.currentUser.uid.toString();
+   users.doc(uid).delete();
+  }
+
+  //Firebase ACTUALIZAR
   Future<void> actualizarUsuario(String nombre, String direccion, String numero) async{
    CollectionReference users = FirebaseFirestore.instance.collection("Usuarios");
    String uid = auth.currentUser.uid.toString();
@@ -63,37 +76,37 @@ class _MyHomePageState extends State<MyHomePage> {
           title: Text(
             "Usuario: " + FirebaseAuth.instance.currentUser.email.toString(),
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 14,
               fontFamily: 'Marker'
             ),
           ),
           actions: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(right: 10.0),
+              padding: const EdgeInsets.only(right: 15),
               child: GestureDetector(
                 child: Stack(
                   alignment: Alignment.topCenter,
                   children: <Widget>[
                     Icon(
                       Icons.edit,
-                      size: 40,
+                      size: 30,
                     ),
                   ],
                 ),
                 onTap: () {
-                    dialogoModificarDatos(context);
+                    dialogoModificarDatosEliminarUsuario(context);
                 },
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 10.0),
+              padding: const EdgeInsets.only(right: 15),
               child: GestureDetector(
                 child: Stack(
                   alignment: Alignment.topCenter,
                   children: <Widget>[
                     Icon(
                       Icons.shopping_cart,
-                      size: 40,
+                      size: 30,
                     ),
                     if (productsCarrito.length > 0)
                       Padding(
@@ -227,52 +240,148 @@ class _MyHomePageState extends State<MyHomePage> {
       );
     }
 
-    dialogoModificarDatos(BuildContext context) {
+    dialogoModificarDatosEliminarUsuario(BuildContext context) {
     return showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-            title: Text('Editar Datos del Usuario'),
-            content: Container(
-              height: 150,
-              child: Column(
-                children: [
-                  TextField(
-                    controller: _nombreController,
-                    decoration: InputDecoration(hintText: 'Nombre'),
+          return 
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              AlertDialog(
+                title: Text('Editar Datos Usuario',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Marker',
+                  color: Colors.indigo
+                ),),
+                content: Container(
+                  height: 150,
+                  child: Column(
+                    children: [
+                      TextField(
+                        controller: _nombreController,
+                        decoration: InputDecoration(hintText: 'Nombre'),
+                      ),
+                      TextField(
+                        controller: _direccionController,
+                        decoration: InputDecoration(hintText: 'Dirección'),
+                      ),
+                      TextField(
+                        controller: _numeroController,
+                        decoration: InputDecoration(hintText: 'Número de teléfono'),
+                        keyboardType: TextInputType.number,
+                      ),
+                    ],
                   ),
-                  TextField(
-                    controller: _direccionController,
-                    decoration: InputDecoration(hintText: 'Dirección'),
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      submitActionActualizarUsuario(context);
+                      Navigator.pop(context);
+                    },
+                    child: Text('Actualizar',
+                    style: TextStyle(
+                      fontFamily: 'Marker',
+                      color: Colors.green
+                    ),),
                   ),
-                  TextField(
-                    controller: _numeroController,
-                    decoration: InputDecoration(hintText: 'Número de teléfono'),
-                    keyboardType: TextInputType.number,
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Cancelar',
+                    style: TextStyle(
+                      fontFamily: 'Marker',
+                    ),),
                   ),
+                  Text("*Todos los campos son obligatorios",
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontFamily: 'Marker'
+                      ),)
                 ],
               ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  submitAction(context);
-                  Navigator.pop(context);
-                },
-                child: Text('Actualizar'),
+              AlertDialog(
+                title:Text('Eliminar cuenta del Usuario',
+                style: TextStyle(
+                  fontFamily: 'Marker',
+                  color: Colors.indigo,
+                  fontSize: 16,
+                ),),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      dialogoConfirmarEliminarUsuario(context);
+                    },
+                    child: Text('Eliminar',
+                    style: TextStyle(
+                      fontFamily: 'Marker',
+                      color: Colors.red
+                    ),),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Cancelar',
+                    style: TextStyle(
+                      fontFamily: 'Marker',
+                    ),),
+                  )
+                ],
               ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('Cancelar'),
-              )
-            ],
-          );
+          
+          ],
+        );
+          
         });
   }
 
-  submitAction(BuildContext context) {
+  dialogoConfirmarEliminarUsuario(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              AlertDialog(
+                title: Text('¿Estás seguro? PERDERAS TODOS LOS DATOS DEL USUARIO.',
+                style: TextStyle(
+                  fontFamily: 'Marker',
+                  color: Colors.indigo
+                ),),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      eliminarUsuarioCol();
+                      eliminarUsuarioAuth();
+                      Navigator.of(context).pushNamedAndRemoveUntil(PantallaSesion.rutaNombre, (Route<dynamic> route) => false);
+                    },
+                    child: 
+                    Text('Confirmar',
+                      style: TextStyle(
+                        fontFamily: 'Marker',
+                        fontSize: 18,
+                        color: Colors.red[900]
+                      ),),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Cancelar'),
+                  )
+                ],
+              ),          
+          ],
+        );
+      }
+    );
+  }
+
+  submitActionActualizarUsuario(BuildContext context) {
     actualizarUsuario(_nombreController.text, _direccionController.text, _numeroController.text);
     _nombreController.clear();
     _numeroController.clear();
