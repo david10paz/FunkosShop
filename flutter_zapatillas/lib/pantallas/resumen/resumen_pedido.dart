@@ -4,30 +4,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_zapatillas/design/config_tam.dart';
 import 'package:flutter_zapatillas/design/constantes.dart';
-import 'package:flutter_zapatillas/pantallas/carro/carro.dart';
 import 'package:flutter_zapatillas/pantallas/iniciar_sesion/pantalla_sesion.dart';
 import 'package:flutter_zapatillas/pantallas/pago/pantalla_pago.dart';
 import 'package:flutter_zapatillas/pantallas/principal/listaProductos/productos.dart';
+import '../../pantallas/registrarse_completar/listaProvincias.dart';
 
 
-class ResumenPedido extends StatelessWidget {
-  final String documentId;
+class ResumenPedido extends StatefulWidget {
+  @override
+  _ResumenPedidoState createState() =>
+      _ResumenPedidoState();
+}
 
-  ResumenPedido(this.documentId);
+class _ResumenPedidoState extends State<ResumenPedido> {
 
 
   FirebaseAuth auth = FirebaseAuth.instance;
 
   TextEditingController _direccionController = TextEditingController();
   TextEditingController _numeroController = TextEditingController();
+  String provincia;
 
   
   //Firebase
-  Future<void> actualizarUsuario(String direccion, String numero) async{
+  Future<void> actualizarUsuario(String direccion, String numero, String provincia) async{
    CollectionReference users = FirebaseFirestore.instance.collection("Usuarios");
    String uid = auth.currentUser.uid.toString();
    users.doc(uid)
-   .update({'direccion': direccion, 'telefono': numero})
+   .update({'direccion': direccion, 'telefono': numero, 'provincia': provincia})
    .then((value) => print("Usuario modificado correctamente"))
    .catchError((error) => print("ERROR"));
   }
@@ -35,11 +39,12 @@ class ResumenPedido extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CollectionReference users = FirebaseFirestore.instance.collection('Usuarios');
-    return Scaffold(
-      body:Container(
-        child:
-          FutureBuilder<DocumentSnapshot>(
-          future: users.doc(documentId).get(),
+    String documentId = FirebaseAuth.instance.currentUser.uid.toString();
+        return Scaffold(
+          body:Container(
+            child:
+              FutureBuilder<DocumentSnapshot>(
+              future: users.doc(documentId).get(),
           builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
 
             if (snapshot.connectionState == ConnectionState.done) {
@@ -79,11 +84,21 @@ class ResumenPedido extends StatelessWidget {
                             ),
                             SizedBox(height: getProporcionalPantallaAlto(30)),
                             Text(
-                              "QUIERES CONTINUAR CON ESTOS DATOS? \n\n Dirección: ${data['direccion']} \n Teléfono: ${data['telefono']}",
+                              "QUIERES CONTINUAR CON ESTOS DATOS?\n",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontFamily: 'Marker',
                                 fontSize: 22,
+                                color: Colors.indigo,
+                                decoration: TextDecoration.underline
+                              )
+                            ),
+                            Text(
+                              "Teléfono: ${data['telefono']} \n Dirección: ${data['direccion']} \n Provincia: ${data['provincia']}\n",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Marker',
+                                fontSize: 20,
                                 color: Colors.indigo,
                               )
                             ),
@@ -128,7 +143,9 @@ class ResumenPedido extends StatelessWidget {
                 ),
               );
             }
-            return Text("Cargando..");
+            return CircularProgressIndicator(
+              strokeWidth: 6,
+            );
           },
         ),
       ),
@@ -139,7 +156,8 @@ class ResumenPedido extends StatelessWidget {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Editar Datos del Usuario'),
+            title: Text('Editar Datos del Usuario',
+            style: TextStyle(fontFamily: 'Marker'),),
             content: Container(
               height: 150,
               child: Column(
@@ -153,10 +171,36 @@ class ResumenPedido extends StatelessWidget {
                     decoration: InputDecoration(hintText: 'Número de teléfono'),
                     keyboardType: TextInputType.number,
                   ),
+                  DropdownButton(
+                    hint: Text("Seleccione su Provincia"),
+                    isExpanded: true,
+                    value: provincia,
+                    onChanged: (newvalue) {
+                      setState(() {
+                        provincia = newvalue;
+                      });
+                    },
+                    items: listaProvincias.map((valueItem) {
+                      return DropdownMenuItem(
+                        value: valueItem,
+                        child: Text(valueItem,
+                        style: TextStyle(color: Colors.indigo),),
+                      );
+                    }).toList(),
+                  )
                 ],
               ),
             ),
             actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Cancelar',
+                  style: TextStyle(
+                    fontFamily: 'Marker',
+                  ),),
+              ),
               TextButton(
                 onPressed: () {
                   submitAction(context);
@@ -168,14 +212,12 @@ class ResumenPedido extends StatelessWidget {
                   );
                   mensajeDatosActualizados(context);
                 },
-                child: Text('Actualizar'),
+                child: Text('Actualizar',
+                  style: TextStyle(
+                    fontFamily: 'Marker',
+                    color: Colors.green
+                  ),),
               ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('Cancelar'),
-              )
             ],
           );
         });
@@ -190,6 +232,15 @@ class ResumenPedido extends StatelessWidget {
             actions: [
               TextButton(
                 onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Cancelar',
+                style: TextStyle(
+                  fontFamily: 'Marker'
+                  ),),
+              ),
+              TextButton(
+                onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => 
@@ -197,14 +248,12 @@ class ResumenPedido extends StatelessWidget {
                     ),
                   );
                 },
-                child: Text('Proceder'),
+                child: Text('Proceder',
+                style: TextStyle(
+                  color: Colors.green,
+                  fontFamily: 'Marker',
+                  fontSize: 16),),
               ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('Cancelar'),
-              )
             ],
           );
         });
@@ -214,7 +263,7 @@ class ResumenPedido extends StatelessWidget {
     return 
       Scaffold(
         appBar: AppBar(
-          title: Text("PROCEDAMOS AL PAGO!", textAlign: TextAlign.center),
+          title: Text("¡PAGO!", textAlign: TextAlign.center),
           centerTitle: true,
           automaticallyImplyLeading: false,
           actions: <Widget>[
@@ -241,13 +290,13 @@ class ResumenPedido extends StatelessWidget {
         context: context,
         builder: (context) {
           return SimpleDialog(
-            title: Text('Editados los campos introducidos.'),
+            title: Text('Editados los campos introducidos. '),
           );
         });
   }
 
   submitAction(BuildContext context) {
-    actualizarUsuario(_direccionController.text, _numeroController.text);
+    actualizarUsuario(_direccionController.text, _numeroController.text, provincia.trim());
     _numeroController.clear();
     _direccionController.clear();
   }

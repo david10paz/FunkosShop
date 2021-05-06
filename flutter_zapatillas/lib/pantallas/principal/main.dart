@@ -11,9 +11,11 @@ class PantallaPrincipal extends StatelessWidget {
   static String rutaNombre = "/principal";
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return 
+    WillPopScope(
+      child: Scaffold(
       appBar: AppBar(
-        title: Text("BIENVENIDO!", textAlign: TextAlign.center),
+        title: Text("¡BIENVENIDO!", textAlign: TextAlign.center),
         centerTitle: true,
         automaticallyImplyLeading: false,
         actions: <Widget>[
@@ -32,6 +34,35 @@ class PantallaPrincipal extends StatelessWidget {
         leading: SizedBox(),
       ),
       body:PantallaPrincipalProductos(),
+    ),
+    onWillPop: () => showDialog<bool>(
+      context: context,
+      builder: (c) => AlertDialog(
+        title: Text('¡ESPERA!',
+        style: TextStyle(
+          color: Colors.indigo
+        ),),
+        content: Text('Realmente quieres salir de la aplicación'),
+        actions: [
+          TextButton(
+            child: Text('SI',
+            style: TextStyle(
+              color: Colors.red
+            ),),
+            onPressed: () async {
+              productsCarrito.clear();
+              await FirebaseAuth.instance.signOut();
+              Navigator.of(context).pushNamedAndRemoveUntil(PantallaSesion.rutaNombre, (Route<dynamic> route) => false);
+            }
+          ),
+          TextButton(
+            child: Text('NO'),
+            onPressed: () => 
+            Navigator.pop(c, false),
+          ),
+        ],
+      ),
+    ),
     );
   }
 }

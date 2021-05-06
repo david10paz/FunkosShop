@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "958894405226",
-    "project_id": "bambasshop-d722f",
-    "storage_bucket": "bambasshop-d722f.appspot.com"
+    "project_number": "509604530062",
+    "project_id": "funkos-shop",
+    "storage_bucket": "funkos-shop.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:958894405226:android:bb92380230e012919bfc13",
+        "mobilesdk_app_id": "1:509604530062:android:a00b14edbc1a1e4c9dc6df",
         "android_client_info": {
-          "package_name": "com.example.flutter_zapatillas"
+          "package_name": "com.example.funkosshop"
         }
       },
       "oauth_client": [
         {
-          "client_id": "958894405226-u9v3omqtpn7k6ucnvl2onbegn3bfd7eb.apps.googleusercontent.com",
+          "client_id": "509604530062-23esm9of9n6la05dtmvl6kqtmquvljs5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDRJQ0x3Rjh6nlfm8v5FvkMuiX3ULHcUMM"
+          "current_key": "AIzaSyCTUTF35uDeXDpI1v58-mKXy425U9HMBMQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "958894405226-u9v3omqtpn7k6ucnvl2onbegn3bfd7eb.apps.googleusercontent.com",
+              "client_id": "509604530062-23esm9of9n6la05dtmvl6kqtmquvljs5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

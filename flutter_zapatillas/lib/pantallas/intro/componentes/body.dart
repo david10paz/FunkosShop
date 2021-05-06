@@ -15,16 +15,16 @@ class _BodyState extends State<Body> {
   int currentPage = 0;
   List<Map<String, String>> splashData = [
     {
-      "image": "assets/images/logo.png",
-      "text": "BIENVENIDO A TU TIENDA DE ZAPATILLAS EXCLUSIVAS!!"
+      "image": "assets/images/logo.jpg",
+      "text": "¡BIENVENIDO A TU TIENDA DE FUNKOS EXCLUSIVOS!"
     },
     {
-      "text": "Contamos con numerosas marcas reconocidas. \nNIKE, ADIDAS, CONVERSE...",
+      "text": "Contamos con numerosas colecciones de funkos reconocidos.",
       "image": "assets/images/fondo.jpg"
     },
     {
       "text": "Ofrecemos una gran comodidad en su compra. \nComo una efectiva entrega a su domicilio",
-      "image": "assets/images/portada3.png"
+      "image": "assets/images/fondo2.png"
     },
   ];
   @override
@@ -108,9 +108,9 @@ class ContenidoIntro extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Spacer(),
+        SizedBox(height: getProporcionalPantallaAlto(5)),
         Text(
-          "BAMBAS SHOP", 
+          "FUNKOS SHOP", 
             style: TextStyle(
             fontSize: getProporcionalPantallaAncho(38),
             color: colorPrincipal,
@@ -118,10 +118,10 @@ class ContenidoIntro extends StatelessWidget {
             fontFamily: 'Marker'
           ),
         ),
-        Spacer(),
+        SizedBox(height: getProporcionalPantallaAlto(10)),
         Image.asset(
           image,
-          height: getProporcionalPantallaAlto(350)
+          height: getProporcionalPantallaAlto(300)
           ),
         Spacer(),
         Text(

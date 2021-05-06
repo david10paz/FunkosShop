@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zapatillas/design/constantes.dart';
 import 'package:flutter_zapatillas/pantallas/principal/listaProductos/productos.dart';
 
 class PrimerPlano extends StatelessWidget {
@@ -18,39 +17,46 @@ class PrimerPlano extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            "BAMBAS SHOP",
-            style: TextStyle(color: Colors.white),
+            "FUNKOS SHOP",
+            style: TextStyle(
+              fontFamily: 'Marker',
+              color: Colors.white,
+              fontSize: 15
+              ),
           ),
           Text(
             producto.titulo,
             style: Theme.of(context)
                 .textTheme
                 .headline4
-                .copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                .copyWith(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30, fontFamily: 'Marker'),
           ),
-          SizedBox(height: 15),
           Row(
             children: <Widget>[
               RichText(
                 text: TextSpan(
                   children: [
-                    TextSpan(text: "PRECIO: \n"),
+                    TextSpan(text: "PRECIO: \n", style: TextStyle(fontFamily: 'Marker')),
                     TextSpan(
-                      text: "\$${producto.precio}",
+                      text: "${producto.precio} €",
                       style: Theme.of(context).textTheme.headline4.copyWith(
-                          color: colorPrincipal, fontWeight: FontWeight.bold),
+                          color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Marker', fontSize: 20),
                     ),
                   ],
                 ),
               ),
-              SizedBox(width: 20),
+              SizedBox(width: 120),
               Expanded(
-                child: Hero(
+                child: 
+                Container(
+                  height: 170,
+                  child: Hero(
                   tag: "${producto.id}",
                   child: Image.asset(
                     "assets/images/productos/${producto.imagen}",
                     fit: BoxFit.fill,
                   ),
+                ),
                 ),
               )
             ],

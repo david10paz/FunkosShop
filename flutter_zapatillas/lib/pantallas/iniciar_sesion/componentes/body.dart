@@ -23,7 +23,7 @@ class Body extends StatelessWidget {
                 Text(
                   "¡BIENVENIDO!", 
                   style: TextStyle(
-                    color: colorPrincipal,
+                    color: Colors.black,
                     fontSize: getProporcionalPantallaAncho(30),
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Marker'

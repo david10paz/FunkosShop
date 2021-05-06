@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../componentes/boton.dart';
@@ -41,12 +42,27 @@ class Body extends StatelessWidget {
   }
 }
 
+
+
 class FormularioPassOlvidado extends StatefulWidget {
   @override
   _FormularioPassOlvidadoState createState() => _FormularioPassOlvidadoState();
 }
 
 class _FormularioPassOlvidadoState extends State<FormularioPassOlvidado> {
+
+
+  //Firebase
+  Future<void> _restablecerPass() async{
+    if(_formKey.currentState.validate()){
+
+      FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      mensajeEnviadoRecPass(context);
+      
+    }
+  }
+
+
   final _formKey = GlobalKey<FormState>();
   List<String> errores = [];
   String email;
@@ -107,13 +123,27 @@ class _FormularioPassOlvidadoState extends State<FormularioPassOlvidado> {
         Boton(
           texto: "Recuperar Contraseña", 
           pulsar: (){
-          if(_formKey.currentState.validate()){
-            
-          }
+            _restablecerPass();
         }),
         SizedBox(height: 20),
         NoRegistrado(),
       ],),
     );
+  }
+
+
+  mensajeEnviadoRecPass(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Si el usuario se encuentra registrado habrá recibido unas instrucciones para restablecer su contraseña.',
+            style: TextStyle(
+              fontFamily: 'Marker',
+              fontSize: 12,
+              color: Colors.indigo
+            ),),
+          );
+        });
   }
 }

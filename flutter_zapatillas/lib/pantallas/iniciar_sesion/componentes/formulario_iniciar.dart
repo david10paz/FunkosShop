@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_zapatillas/pantallas/principal/listaProductos/productos.dart';
 import 'package:flutter_zapatillas/pantallas/principal/main.dart';
 import '../../../componentes/boton.dart';
 import '../../../componentes/formulario_error.dart';
@@ -81,12 +80,6 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
           SizedBox(height: getProporcionalPantallaAlto(25)),
           Row(
             children: [
-              Checkbox(value: recordar, onChanged: (value){
-                setState(() {
-                  recordar = value;
-                });
-              }),
-              Text("Recordar"),
               Spacer(),
               GestureDetector(
                 onTap: () => Navigator.pushNamed(
@@ -103,6 +96,7 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
           Boton(
             texto:"ENTRAR", 
             pulsar:() async{
+                //productsCarrito.clear();
                 _comprobarUsuario();
             }
           ),
@@ -196,9 +190,7 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
             "assets/icons/mail.svg", 
             height: getProporcionalPantallaAncho(18)),
         ),
-      ),   
-        productsCarrito.clear();
-      },
+      ),
     );
   }
 }

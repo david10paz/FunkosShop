@@ -15,19 +15,20 @@ final cabeceraStyle = TextStyle(
 );
 
 // Formulario errores
-final RegExp emailObligaciones =
-    RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+final RegExp emailObligaciones = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+final RegExp tlfnoObligaciones = RegExp(r"^([0-9]){9,9}$");
 const String emailVacio = "Email vacío";
 const String emailError = "Email no admitido";
+const String tlfnoError = "Teléfono no admitido";
 const String passVacio = "Contraseña vacía ";
 const String passCorto = "Contraseña demasiado corta";
 const String passDistintos = "Contraseñas no coinciden";
-const String nombreVacio = "Por favor rellena tu nombre";
-const String numeroVacio = "Por favor introduce tu numero de telefono";
-const String dirVacio = "Por favor introduce tu dirección";
+const String nombreVacio = "Rellena tu nombre";
+const String numeroVacio = "Introduce tu numero de telefono";
+const String dirVacio = "Introduce tu dirección";
 const String noExiste = "No existe dicho usuario";
-const String noPass = "La contraseña no pertenece al usuario";
-const String existeUsuario = "Esta cuenta ya se encuentra registrada";
+const String noPass = "Contraseña no pertenece al usuario";
+const String existeUsuario = "Cuenta ya se registrada";
 
 final otpInputDecoration = InputDecoration(
   contentPadding:

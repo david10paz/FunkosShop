@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_zapatillas/design/constantes.dart';
 import 'package:flutter_zapatillas/pantallas/principal/listaProductos/productos.dart';
-import 'package:flutter_zapatillas/pantallas/principal/pantallas/vistaDetalladaProducto/componentes/anadir_carrito.dart';
 
-
-import 'marca_tamano.dart';
-import 'descripcion.dart';
 import 'primer_plano.dart';
 
 class Body extends StatelessWidget {
@@ -23,7 +20,7 @@ class Body extends StatelessWidget {
               children: <Widget>[
                 Container(
                   margin: EdgeInsets.only(top: size.height * 0.26),
-                  height: 450,
+                  height: 400,
                   padding: EdgeInsets.only(
                     top: size.height * 0.12,
                     left: 20,
@@ -40,11 +37,10 @@ class Body extends StatelessWidget {
                   ),
                   child: Column(
                     children: <Widget>[
-                      MarcaTamano(producto: producto),
+                      marcaTamano(context),
                       SizedBox(height: 10),
-                      Descripcion(producto: producto),
+                      descripcion(context),
                       SizedBox(height: 10),
-                      //AnadirCarrito()
                     ],
                   ),
                 ),
@@ -53,6 +49,58 @@ class Body extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+
+  marcaTamano(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: RichText(
+            text: TextSpan(
+              style: TextStyle(color: colorPrincipal),
+              children: [
+                TextSpan(text: "MARCA\n", style: TextStyle(fontSize: 12, fontFamily: 'Marker')),
+                TextSpan(
+                  text: "${producto.coleccion} ",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline5
+                      .copyWith(fontWeight: FontWeight.bold, fontSize: 20, fontFamily: 'Marker', color: Colors.indigo),
+                )
+              ],
+            ),
+          ),
+        ),
+        SizedBox(width: 50),
+        Expanded(
+          child: RichText(
+            text: TextSpan(
+              style: TextStyle(color: colorPrincipal),
+              children: [
+                TextSpan(text: "Tamaño\n",  style: TextStyle(fontSize: 12, fontFamily: 'Marker')),
+                TextSpan(
+                  text: "${producto.tamano} cm",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline5
+                      .copyWith(fontWeight: FontWeight.bold ,fontSize: 20, fontFamily: 'Marker', color: Colors.indigo),
+                )
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  descripcion(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: Text(
+        producto.descripcion,
+        style: TextStyle(height: 1.5, fontFamily: 'Marker'),
       ),
     );
   }

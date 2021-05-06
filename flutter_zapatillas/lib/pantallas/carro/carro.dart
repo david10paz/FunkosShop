@@ -243,7 +243,7 @@ class _CartState extends State<Cart> {
                   pulsar: () => {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => ResumenPedido(FirebaseAuth.instance.currentUser.uid.toString()),
+                        builder: (context) => ResumenPedido(),
                       ),
                     ),
                   },
