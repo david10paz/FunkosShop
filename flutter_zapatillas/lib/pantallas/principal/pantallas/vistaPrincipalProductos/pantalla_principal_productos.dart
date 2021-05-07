@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_zapatillas/pantallas/registrarse_completar/listaProvincias.dart';
 
 import '../../listaProductos/productos.dart';
+import '../../listaProductos/productos.dart';
 
 class PantallaPrincipalProductos extends StatelessWidget {
   // This widget is the root of your application.
@@ -172,6 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
       itemBuilder: (context, index) {
         final String imagen = productsLista[index].imagen;
         var item = productsLista[index];
+        item.cantidad = 1;
 
         return GestureDetector(
             onTap: () => Navigator.push(
@@ -434,8 +436,5 @@ class _MyHomePageState extends State<MyHomePage> {
 
   submitActionActualizarUsuario(BuildContext context) {
     actualizarUsuario(_nombreController.text, _direccionController.text, _numeroController.text, provincia.trim());
-    _nombreController.clear();
-    _numeroController.clear();
-    _direccionController.clear();
   }
 }

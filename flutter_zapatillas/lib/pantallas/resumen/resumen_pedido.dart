@@ -5,9 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_zapatillas/design/config_tam.dart';
 import 'package:flutter_zapatillas/design/constantes.dart';
 import 'package:flutter_zapatillas/pantallas/iniciar_sesion/pantalla_sesion.dart';
-import 'package:flutter_zapatillas/pantallas/pago/pantalla_pago.dart';
+import 'package:flutter_zapatillas/pantallas/pago/body.dart';
 import 'package:flutter_zapatillas/pantallas/principal/listaProductos/productos.dart';
 import '../../pantallas/registrarse_completar/listaProvincias.dart';
+import '../pago/pantalla_pago.dart';
 
 
 class ResumenPedido extends StatefulWidget {
@@ -162,11 +163,11 @@ class _ResumenPedidoState extends State<ResumenPedido> {
               height: 150,
               child: Column(
                 children: [
-                  TextField(
+                  TextFormField(
                     controller: _direccionController,
                     decoration: InputDecoration(hintText: 'Dirección'),
                   ),
-                  TextField(
+                  TextFormField(
                     controller: _numeroController,
                     decoration: InputDecoration(hintText: 'Número de teléfono'),
                     keyboardType: TextInputType.number,
@@ -207,7 +208,7 @@ class _ResumenPedidoState extends State<ResumenPedido> {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => 
-                       encabezadovistaPago(context)
+                       CreditCardPage()
                     ),
                   );
                   mensajeDatosActualizados(context);
@@ -228,7 +229,9 @@ class _ResumenPedidoState extends State<ResumenPedido> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('¿Confirmas?'),
+            title: Text('¿Confirmas?',
+            style: TextStyle(
+              fontFamily: 'Marker'),),
             actions: [
               TextButton(
                 onPressed: () {
@@ -244,7 +247,7 @@ class _ResumenPedidoState extends State<ResumenPedido> {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => 
-                      encabezadovistaPago(context)
+                      CreditCardPage()
                     ),
                   );
                 },
@@ -259,45 +262,21 @@ class _ResumenPedidoState extends State<ResumenPedido> {
         });
   }
 
-  Widget encabezadovistaPago(BuildContext context) {
-    return 
-      Scaffold(
-        appBar: AppBar(
-          title: Text("¡PAGO!", textAlign: TextAlign.center),
-          centerTitle: true,
-          automaticallyImplyLeading: false,
-          actions: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(right: 10.0),
-                child:GestureDetector( 
-                  onTap: () async {
-                  productsCarrito.clear();
-                  Navigator.of(context).pushNamedAndRemoveUntil(PantallaSesion.rutaNombre, (Route<dynamic> route) => false);
-                  await FirebaseAuth.instance.signOut();
-                }, 
-                child: Icon(Icons.logout, size:38 )) ,
-                ),
-              ],
-          
-          leading: SizedBox(),
-        ),
-        body:CreditCardPage(),
-      );
-  }
-
   mensajeDatosActualizados(BuildContext context) {
     return showDialog(
         context: context,
         builder: (context) {
-          return SimpleDialog(
-            title: Text('Editados los campos introducidos. '),
+          return AlertDialog(
+            title: Text('Editados los campos introducidos. ',
+            style: TextStyle(
+              fontFamily: 'Marker',
+              color: Colors.indigo
+            )),
           );
         });
   }
 
   submitAction(BuildContext context) {
     actualizarUsuario(_direccionController.text, _numeroController.text, provincia.trim());
-    _numeroController.clear();
-    _direccionController.clear();
   }
 }

@@ -23,6 +23,7 @@ class PantallaPrincipal extends StatelessWidget {
               padding: const EdgeInsets.only(right: 10.0),
               child:GestureDetector( 
                 onTap: () async {
+                
                 productsCarrito.clear();
                  Navigator.of(context).pushNamedAndRemoveUntil(PantallaSesion.rutaNombre, (Route<dynamic> route) => false);
                  await FirebaseAuth.instance.signOut();

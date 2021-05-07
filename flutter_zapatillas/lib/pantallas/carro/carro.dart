@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zapatillas/design/constantes.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_zapatillas/pantallas/resumen/resumen_pedido.dart';
 
 
 import '../../componentes/boton.dart';
+import '../../design/config_tam.dart';
 
 class Cart extends StatefulWidget {
   static String rutaNombre = "/carro";
@@ -20,6 +20,7 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
+
   _CartState(this._cart);
   final _scrollController = ScrollController();
   var _firstScroll = true;
@@ -42,19 +43,21 @@ class _CartState extends State<Cart> {
               style: new TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Marker',
-                  fontSize: 16.0,
-                  color: Colors.white))
+                  fontSize: 18.0,
+                  color: Colors.white)),
         ],
       ),
     );
   }
 
   String valorTotal(List<Productos> listaProductos) {
-    double total = 0.0;
+    double precioProd = 0.0;
+    double gastosEnvio = 3.90;
 
     for (int i = 0; i < listaProductos.length; i++) {
-      total = total + listaProductos[i].precio * listaProductos[i].cantidad;
+      precioProd = precioProd + listaProductos[i].precio * listaProductos[i].cantidad;
     }
+    double total = precioProd + gastosEnvio;
     return total.toStringAsFixed(2);
   }
 
@@ -227,16 +230,20 @@ class _CartState extends State<Cart> {
                   );
                 },
               ),
-              SizedBox(
-                width: 10.0,
-              ),
+              SizedBox(height: getProporcionalPantallaAlto(20),),
               pagoTotal(_cart),
               SizedBox(
                 width: 20.0,
               ),
+              Text("Gastos de envio ya incluidos: 3,90 €",
+                style: new TextStyle(
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Marker',
+                fontSize: 14.0,
+                color: Colors.black)),
               Container(
                 height: 100,
-                width: 400,
+                width: 350,
                 padding: EdgeInsets.only(top: 50),
                 child: Boton(
                   texto: "Continuar con el pago",
@@ -249,6 +256,7 @@ class _CartState extends State<Cart> {
                   },
                 ),
               ),
+              SizedBox(height: getProporcionalPantallaAlto(30),),
             ],
           ))),
     );

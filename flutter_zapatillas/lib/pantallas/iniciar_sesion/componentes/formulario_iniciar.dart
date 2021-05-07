@@ -96,7 +96,6 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
           Boton(
             texto:"ENTRAR", 
             pulsar:() async{
-                //productsCarrito.clear();
                 _comprobarUsuario();
             }
           ),

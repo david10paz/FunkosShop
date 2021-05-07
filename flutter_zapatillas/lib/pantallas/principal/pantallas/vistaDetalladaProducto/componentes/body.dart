@@ -19,7 +19,7 @@ class Body extends StatelessWidget {
             child: Stack(
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(top: size.height * 0.26),
+                  margin: EdgeInsets.only(top: size.height * 0.25),
                   height: 400,
                   padding: EdgeInsets.only(
                     top: size.height * 0.12,

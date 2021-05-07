@@ -21,7 +21,7 @@ class PrimerPlano extends StatelessWidget {
             style: TextStyle(
               fontFamily: 'Marker',
               color: Colors.white,
-              fontSize: 15
+              fontSize: 16
               ),
           ),
           Text(
@@ -36,11 +36,11 @@ class PrimerPlano extends StatelessWidget {
               RichText(
                 text: TextSpan(
                   children: [
-                    TextSpan(text: "PRECIO: \n", style: TextStyle(fontFamily: 'Marker')),
+                    TextSpan(text: "PRECIO: \n", style: TextStyle(fontFamily: 'Marker', fontSize: 16)),
                     TextSpan(
                       text: "${producto.precio} €",
                       style: Theme.of(context).textTheme.headline4.copyWith(
-                          color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Marker', fontSize: 20),
+                          color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Marker', fontSize: 22),
                     ),
                   ],
                 ),
@@ -49,7 +49,7 @@ class PrimerPlano extends StatelessWidget {
               Expanded(
                 child: 
                 Container(
-                  height: 170,
+                  height: 180,
                   child: Hero(
                   tag: "${producto.id}",
                   child: Image.asset(

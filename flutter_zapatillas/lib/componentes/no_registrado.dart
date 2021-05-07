@@ -15,7 +15,7 @@ class NoRegistrado extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "¿No estas registrado?  ",
+          "¿No estás registrado?  ",
           style: TextStyle(
             fontSize: getProporcionalPantallaAncho(16)
           ),
