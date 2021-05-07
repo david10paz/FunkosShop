@@ -54,12 +54,16 @@ class _FormularioPassOlvidadoState extends State<FormularioPassOlvidado> {
 
   //Firebase
   Future<void> _restablecerPass() async{
-    if(_formKey.currentState.validate()){
-
-      FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-      mensajeEnviadoRecPass(context);
-      
+    try{
+       if(_formKey.currentState.validate()){
+         _formKey.currentState.save();
+          await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+          mensajeEnviadoRecPass(context);
     }
+    }catch (e){
+      print(e);
+    }
+   
   }
 
 
