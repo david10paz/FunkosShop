@@ -52,6 +52,21 @@ class FormularioPassOlvidado extends StatefulWidget {
 class _FormularioPassOlvidadoState extends State<FormularioPassOlvidado> {
 
 
+  
+void anadirError({String error}) {
+      if (!errores.contains(error))
+        setState(() {
+          errores.add(error);
+        });
+    }
+
+    void quitarError({String error}) {
+      if (errores.contains(error))
+        setState(() {
+          errores.remove(error);
+        });
+    }
+
   //Firebase
   Future<void> _restablecerPass() async{
     try{
@@ -60,8 +75,13 @@ class _FormularioPassOlvidadoState extends State<FormularioPassOlvidado> {
           await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
           mensajeEnviadoRecPass(context);
     }
-    }catch (e){
-      print(e);
+    }on FirebaseAuthException catch(e){
+      if (e.code == 'user-not-found') {
+          anadirError(error: noExiste);
+          return "";
+        } else {
+          quitarError(error: noExiste);
+        }
     }
    
   }
@@ -141,7 +161,7 @@ class _FormularioPassOlvidadoState extends State<FormularioPassOlvidado> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Si el usuario se encuentra registrado habrá recibido unas instrucciones para restablecer su contraseña.',
+            title: Text('Has recibido unas instrucciones a tu correo para restablecer tu contraseña.',
             style: TextStyle(
               fontFamily: 'Marker',
               fontSize: 12,
