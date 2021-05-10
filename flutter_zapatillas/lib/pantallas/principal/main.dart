@@ -43,7 +43,7 @@ class PantallaPrincipal extends StatelessWidget {
         style: TextStyle(
           color: Colors.indigo
         ),),
-        content: Text('Realmente quieres salir de la aplicación'),
+        content: Text('Realmente, ¿Quieres salir de la aplicación?'),
         actions: [
           TextButton(
             child: Text('SI',

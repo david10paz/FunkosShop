@@ -204,7 +204,7 @@ class _FormularioRegistrarCompletarState extends State<FormularioRegistrarComple
     return Padding(
       padding: const EdgeInsets.only(bottom:20),
       child: Container(
-        padding: const EdgeInsets.only(right:10, left:10),
+        padding: const EdgeInsets.only(right:25, left:25),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.white),
           borderRadius: BorderRadius.circular(20),),
@@ -227,7 +227,7 @@ class _FormularioRegistrarCompletarState extends State<FormularioRegistrarComple
             return DropdownMenuItem(
               value: valueItem,
               child: Text(valueItem,
-              style: TextStyle(color: Colors.white),),
+              style: TextStyle(color: Colors.black, fontSize: 14),),
             );
           }).toList(),
         ),

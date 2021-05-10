@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_zapatillas/design/config_tam.dart';
 import 'package:flutter_zapatillas/design/constantes.dart';
-import 'package:flutter_zapatillas/pantallas/iniciar_sesion/pantalla_sesion.dart';
-import 'package:flutter_zapatillas/pantallas/pago/body.dart';
-import 'package:flutter_zapatillas/pantallas/principal/listaProductos/productos.dart';
 import '../../pantallas/registrarse_completar/listaProvincias.dart';
 import '../pago/pantalla_pago.dart';
 
@@ -204,14 +201,7 @@ class _ResumenPedidoState extends State<ResumenPedido> {
               ),
               TextButton(
                 onPressed: () {
-                  submitAction(context);
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => 
-                       CreditCardPage()
-                    ),
-                  );
-                  mensajeDatosActualizados(context);
+                  mensajeConfirmarDatosActualizados(context);
                 },
                 child: Text('Actualizar',
                   style: TextStyle(
@@ -244,7 +234,7 @@ class _ResumenPedidoState extends State<ResumenPedido> {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).push(
+                 Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) => 
                       CreditCardPage()
@@ -267,7 +257,7 @@ class _ResumenPedidoState extends State<ResumenPedido> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Editados los campos introducidos. ',
+            title: Text('Editados los campos introducidos.',
             style: TextStyle(
               fontFamily: 'Marker',
               color: Colors.indigo
@@ -275,6 +265,48 @@ class _ResumenPedidoState extends State<ResumenPedido> {
           );
         });
   }
+
+  mensajeConfirmarDatosActualizados(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('¿Confirmas estos datos?',
+            style: TextStyle(fontFamily: 'Marker', color: Colors.indigo),),
+            content: Text(' Dirección: ${_direccionController.value.text.toString()}\n Teléfono: ${_numeroController.value.text.toString()}\n Provincia: ${provincia.trim()}.',
+              style: TextStyle(fontFamily: 'Marker', ),),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('No',
+                  style: TextStyle(
+                    fontFamily: 'Marker',
+                  ),),
+              ),
+              TextButton(
+                onPressed: () {
+                  submitAction(context);
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => 
+                       CreditCardPage()
+                    ),
+                  );
+                  mensajeDatosActualizados(context);
+                },
+                child: Text('Si',
+                  style: TextStyle(
+                    fontFamily: 'Marker',
+                    color: Colors.green
+                  ),),
+              ),
+            ],
+          );
+        });
+  }
+
 
   submitAction(BuildContext context) {
     actualizarUsuario(_direccionController.text, _numeroController.text, provincia.trim());

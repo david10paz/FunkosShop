@@ -173,8 +173,6 @@ class _MyHomePageState extends State<MyHomePage> {
       itemBuilder: (context, index) {
         final String imagen = productsLista[index].imagen;
         var item = productsLista[index];
-        item.cantidad = 1;
-
         return GestureDetector(
             onTap: () => Navigator.push(
                 context,
@@ -244,6 +242,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ),
                               onTap: () {
                                 setState(() {
+                                  item.cantidad = 1;
                                   if (!productsCarrito.contains(item))
                                     productsCarrito.add(item);
                                   else

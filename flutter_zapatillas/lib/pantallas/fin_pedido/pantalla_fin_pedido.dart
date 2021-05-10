@@ -22,11 +22,11 @@ class PantallaFinPedido extends StatelessWidget {
     onWillPop: () => showDialog<bool>(
       context: context,
       builder: (c) => AlertDialog(
-        title: Text('Enhorabuena por tu compra',
+        title: Text('¡Enhorabuena por tu compra!',
         style: TextStyle(
           color: Colors.indigo
         ),),
-        content: Text('¿Ahora que hacemos?'),
+        content: Text('¿Ahora qué hacemos?'),
         actions: [
           TextButton(
             child: Text('Salir App',
