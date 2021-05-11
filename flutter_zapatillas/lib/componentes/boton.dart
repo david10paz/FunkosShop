@@ -6,12 +6,13 @@ import '../design/constantes.dart';
 
 class Boton extends StatelessWidget {
   const Boton({
-    Key key, this.texto, this.pulsar,
+    Key key,
+    this.texto,
+    this.pulsar,
   }) : super(key: key);
   final String texto;
   final Function pulsar;
 
-  
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -19,18 +20,17 @@ class Boton extends StatelessWidget {
       height: getProporcionalPantallaAlto(50),
       child: TextButton(
         style: TextButton.styleFrom(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          backgroundColor: colorPrincipal
-        ),
-        onPressed: pulsar, 
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            backgroundColor: colorPrincipal),
+        onPressed: pulsar,
         child: Text(
-          texto, 
+          texto,
           style: TextStyle(
-            fontSize: getProporcionalPantallaAncho(18),
-            color: Colors.white,
-            fontFamily: 'Marker'
-            ),
-          ),
+              fontSize: getProporcionalPantallaAncho(18),
+              color: Colors.white,
+              fontFamily: 'Marker'),
+        ),
       ),
     );
   }

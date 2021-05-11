@@ -10,7 +10,6 @@ import 'pantallas/registrarse_satisfactorio/pantalla_login_satisfactorio.dart';
 
 
 final Map<String, WidgetBuilder> rutas = {
-  
   PantallaSesion.rutaNombre: (context) => PantallaSesion(),
   PantallaPassOlvidado.rutaNombre: (context) => PantallaPassOlvidado(),
   PantallaRegistrarseSatisfactorio.rutaNombre: (context) => PantallaRegistrarseSatisfactorio(),

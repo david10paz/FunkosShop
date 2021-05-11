@@ -8,13 +8,17 @@ class FirebaseInitial extends StatelessWidget {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   @override
   Widget build(BuildContext context) {
-     return FutureBuilder(
+    return FutureBuilder(
       // Initialize FlutterFire:
       future: _initialization,
       builder: (context, snapshot) {
         // Check for errors
         if (snapshot.hasError) {
-          return Scaffold(body: Center(child: Text("Error"),),);
+          return Scaffold(
+            body: Center(
+              child: Text("Error"),
+            ),
+          );
         }
 
         // Once complete, show your application

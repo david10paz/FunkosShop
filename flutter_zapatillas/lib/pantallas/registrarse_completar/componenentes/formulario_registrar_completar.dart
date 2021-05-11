@@ -16,7 +16,8 @@ class FormularioRegistrarCompletar extends StatefulWidget {
       _FormularioRegistrarCompletarState();
 }
 
-class _FormularioRegistrarCompletarState extends State<FormularioRegistrarCompletar> {
+class _FormularioRegistrarCompletarState
+    extends State<FormularioRegistrarCompletar> {
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController _nombreController = TextEditingController();
@@ -43,14 +44,22 @@ class _FormularioRegistrarCompletarState extends State<FormularioRegistrarComple
       });
   }
 
-
   //Firebase
-  Future<void> saveDatosUsuario(String nombre, String direccion, String numero, String provincia) async{
-   CollectionReference users = FirebaseFirestore.instance.collection("Usuarios");
-   FirebaseAuth auth = FirebaseAuth.instance;
-   String uid = auth.currentUser.uid.toString();
-   String email = auth.currentUser.email.toString();
-   users.doc(uid).set({'uid':uid ,'email': email, 'nombre': nombre, 'direccion': direccion, 'telefono': numero, 'provincia': provincia});
+  Future<void> saveDatosUsuario(
+      String nombre, String direccion, String numero, String provincia) async {
+    CollectionReference users =
+        FirebaseFirestore.instance.collection("Usuarios");
+    FirebaseAuth auth = FirebaseAuth.instance;
+    String uid = auth.currentUser.uid.toString();
+    String email = auth.currentUser.email.toString();
+    users.doc(uid).set({
+      'uid': uid,
+      'email': email,
+      'nombre': nombre,
+      'direccion': direccion,
+      'telefono': numero,
+      'provincia': provincia
+    });
   }
 
   @override
@@ -72,8 +81,13 @@ class _FormularioRegistrarCompletarState extends State<FormularioRegistrarComple
             texto: "Continuar",
             pulsar: () {
               if (_formKey.currentState.validate()) {
-                saveDatosUsuario(_nombreController.text, _dirController.value.text, _numeroController.text, provincia.trim());
-                Navigator.pushNamed(context, PantallaRegistrarseSatisfactorio.rutaNombre);
+                saveDatosUsuario(
+                    _nombreController.text,
+                    _dirController.value.text,
+                    _numeroController.text,
+                    provincia.trim());
+                Navigator.pushNamed(
+                    context, PantallaRegistrarseSatisfactorio.rutaNombre);
               }
             },
           ),
@@ -126,7 +140,7 @@ class _FormularioRegistrarCompletarState extends State<FormularioRegistrarComple
         if (value.isNotEmpty) {
           quitarError(error: numeroVacio);
         }
-        if(tlfnoObligaciones.hasMatch(value)){
+        if (tlfnoObligaciones.hasMatch(value)) {
           quitarError(error: tlfnoError);
         }
         return null;
@@ -136,7 +150,7 @@ class _FormularioRegistrarCompletarState extends State<FormularioRegistrarComple
           anadirError(error: numeroVacio);
           return "";
         }
-        if(!tlfnoObligaciones.hasMatch(value)){
+        if (!tlfnoObligaciones.hasMatch(value)) {
           anadirError(error: tlfnoError);
           return "";
         }
@@ -195,24 +209,23 @@ class _FormularioRegistrarCompletarState extends State<FormularioRegistrarComple
     );
   }
 
-
-  
-
-
   buildDropDownButtonFieldProvincia() {
-    
     return Padding(
-      padding: const EdgeInsets.only(bottom:20),
+      padding: const EdgeInsets.only(bottom: 20),
       child: Container(
-        padding: const EdgeInsets.only(right:25, left:25),
+        padding: const EdgeInsets.only(right: 25, left: 25),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.white),
-          borderRadius: BorderRadius.circular(20),),
+          borderRadius: BorderRadius.circular(20),
+        ),
         child: new DropdownButton(
           hint: Text("Seleccione su Provincia"),
           dropdownColor: Colors.indigo,
           elevation: 5,
-          icon: Icon(Icons.place, color: Colors.black,),
+          icon: Icon(
+            Icons.place,
+            color: Colors.black,
+          ),
           iconSize: 24,
           isExpanded: true,
           underline: SizedBox(),
@@ -222,20 +235,17 @@ class _FormularioRegistrarCompletarState extends State<FormularioRegistrarComple
               provincia = newvalue;
             });
           },
-
           items: listaProvincias.map((valueItem) {
             return DropdownMenuItem(
               value: valueItem,
-              child: Text(valueItem,
-              style: TextStyle(color: Colors.black, fontSize: 14),),
+              child: Text(
+                valueItem,
+                style: TextStyle(color: Colors.black, fontSize: 14),
+              ),
             );
           }).toList(),
         ),
       ),
     );
   }
-
-
-
-
 }

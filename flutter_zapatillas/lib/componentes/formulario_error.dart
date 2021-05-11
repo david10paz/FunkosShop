@@ -15,21 +15,21 @@ class ErrorFormulario extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: List.generate(
-        errores.length, (index) => formularioErrorTexto(error: errores[index]),
-        ),
+        errores.length,
+        (index) => formularioErrorTexto(error: errores[index]),
+      ),
     );
   }
 
   Row formularioErrorTexto({String error}) {
-    return Row(children: [
-        SvgPicture.asset(
-          "assets/icons/Error.svg", 
-          height: getProporcionalPantallaAlto(29),
-          width: getProporcionalPantallaAncho(14)
-        ),
+    return Row(
+      children: [
+        SvgPicture.asset("assets/icons/Error.svg",
+            height: getProporcionalPantallaAlto(29),
+            width: getProporcionalPantallaAncho(14)),
         SizedBox(width: getProporcionalPantallaAncho(10)),
         Text(error),
-      ],);
+      ],
+    );
   }
 }
-

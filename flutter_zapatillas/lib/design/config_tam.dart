@@ -16,12 +16,10 @@ class SizeConfig {
 
 double getProporcionalPantallaAlto(double alto) {
   double pantallaAltura = SizeConfig.pantallaAltura;
-  //812 como capa
   return (alto / 812.0) * pantallaAltura;
 }
 
 double getProporcionalPantallaAncho(double ancho) {
   double pantallaAncho = SizeConfig.pantallaAncho;
-  // 375 como capa
   return (ancho / 375.0) * pantallaAncho;
 }

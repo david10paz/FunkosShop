@@ -23,10 +23,7 @@ class PantallaPrincipal extends StatelessWidget {
               padding: const EdgeInsets.only(right: 10.0),
               child:GestureDetector( 
                 onTap: () async {
-                
-                productsCarrito.clear();
-                 Navigator.of(context).pushNamedAndRemoveUntil(PantallaSesion.rutaNombre, (Route<dynamic> route) => false);
-                 await FirebaseAuth.instance.signOut();
+                mensajeConfirmarLogout(context);
               }, 
               child: Icon(Icons.logout, size:38 )) ,
               ),
@@ -65,5 +62,42 @@ class PantallaPrincipal extends StatelessWidget {
       ),
     ),
     );
+  }
+
+   mensajeConfirmarLogout(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(
+              '¿Quieres salir de la aplicación?',
+              style: TextStyle(fontFamily: 'Marker', color: Colors.indigo, fontSize: 18),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () async{
+                  productsCarrito.clear();
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pushNamedAndRemoveUntil(PantallaSesion.rutaNombre, (Route<dynamic> route) => false);
+                },
+                child: Text(
+                  'SI',
+                  style: TextStyle(fontFamily: 'Marker', color: Colors.red),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  'NO',
+                  style: TextStyle(
+                    fontFamily: 'Marker',
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
   }
 }

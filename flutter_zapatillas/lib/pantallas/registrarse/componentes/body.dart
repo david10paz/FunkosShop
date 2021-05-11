@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zapatillas/pantallas/registrarse/componentes/formulario_registro.dart';
+import 'formulario_registro.dart';
 
 import '../../../design/config_tam.dart';
 import '../../../design/constantes.dart';
@@ -11,8 +11,8 @@ class Body extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         child: Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: getProporcionalPantallaAncho(20)),
+          padding: EdgeInsets.symmetric(
+              horizontal: getProporcionalPantallaAncho(20)),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -26,7 +26,7 @@ class Body extends StatelessWidget {
                 FormularioRegistar(),
                 SizedBox(height: getProporcionalPantallaAlto(20)),
                 Text(
-                  'A continuación proseguiremos con la introducción \nde sus datos personales.',
+                  'A continuación, proseguiremos con la introducción \nde sus datos personales.',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.caption,
                 ),
