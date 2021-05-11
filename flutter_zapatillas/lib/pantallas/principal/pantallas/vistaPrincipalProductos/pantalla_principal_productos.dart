@@ -7,7 +7,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_zapatillas/pantallas/registrarse_completar/listaProvincias.dart';
 
 import '../../listaProductos/productos.dart';
-import '../../listaProductos/productos.dart';
 
 class PantallaPrincipalProductos extends StatelessWidget {
   // This widget is the root of your application.
@@ -43,6 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     productsLista;
     productsCarrito;
+    provincia = "Madrid";
   }
 
   //Firebase ELIMINAR1
@@ -267,20 +267,19 @@ class _MyHomePageState extends State<MyHomePage> {
     return showDialog(
         context: context,
         builder: (context) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              AlertDialog(
-                title: Text(
-                  'Editar Datos Usuario',
-                  style: TextStyle(
-                      fontSize: 16, fontFamily: 'Marker', color: Colors.indigo),
-                ),
-                content: Container(
+          return AlertDialog(
+            title: Text(
+              'Editar Datos Usuario',
+              style: TextStyle(
+                  fontSize: 14, fontFamily: 'Marker', color: Colors.indigo),
+            ),
+            content: StatefulBuilder(
+              builder: (BuildContext context, StateSetter setState) {
+                return Container(
                   height: 200,
                   child: Column(
                     children: [
-                      TextField(
+                      TextFormField(
                         controller: _nombreController,
                         decoration: InputDecoration(hintText: 'Nombre'),
                       ),
@@ -290,11 +289,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       TextField(
                         controller: _numeroController,
-                        decoration: InputDecoration(hintText: 'Número de teléfono'),
+                        decoration:
+                            InputDecoration(hintText: 'Número de teléfono'),
                         keyboardType: TextInputType.number,
                       ),
                       DropdownButton(
-                        hint: Text("Seleccione su Provincia"),
                         isExpanded: true,
                         value: provincia,
                         onChanged: (newvalue) {
@@ -305,43 +304,43 @@ class _MyHomePageState extends State<MyHomePage> {
                         items: listaProvincias.map((valueItem) {
                           return DropdownMenuItem(
                             value: valueItem,
-                            child: Text(valueItem,
-                            style: TextStyle(color: Colors.indigo),),
+                            child: Text(
+                              valueItem,
+                              style: TextStyle(color: Colors.indigo),
+                            ),
                           );
                         }).toList(),
-                      )
+                      ),
                     ],
                   ),
+                );
+              },
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  mensajeConfirmarDatosActualizados(context);
+                },
+                child: Text(
+                  'Actualizar',
+                  style: TextStyle(fontFamily: 'Marker', color: Colors.green),
                 ),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      submitActionActualizarUsuario(context);
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      'Actualizar',
-                      style:
-                          TextStyle(fontFamily: 'Marker', color: Colors.green),
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      'Cancelar',
-                      style: TextStyle(
-                        fontFamily: 'Marker',
-                      ),
-                    ),
-                  ),
-                  Text(
-                    "*Todos los campos son obligatorios",
-                    style: TextStyle(fontSize: 10, fontFamily: 'Marker'),
-                  )
-                ],
               ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  'Cancelar',
+                  style: TextStyle(
+                    fontFamily: 'Marker',
+                  ),
+                ),
+              ),
+              Text(
+                "*Todos los campos son obligatorios",
+                style: TextStyle(fontSize: 10, fontFamily: 'Marker'),
+              )
             ],
           );
         });
@@ -429,6 +428,56 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ],
+          );
+        });
+  }
+
+  mensajeConfirmarDatosActualizados(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('¿Confirmas estos datos?',
+            style: TextStyle(fontFamily: 'Marker', color: Colors.indigo),),
+            content: Text(' Nombre: ${_nombreController.value.text.toString()}\n Dirección: ${_direccionController.value.text.toString()}\n Teléfono: ${_numeroController.value.text.toString()}\n Provincia: ${provincia.trim()}.',
+              style: TextStyle(fontFamily: 'Marker', ),),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('No',
+                  style: TextStyle(
+                    fontFamily: 'Marker',
+                  ),),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  submitActionActualizarUsuario(context);
+                  mensajeDatosActualizados(context);
+                },
+                child: Text('Si',
+                  style: TextStyle(
+                    fontFamily: 'Marker',
+                    color: Colors.green
+                  ),),
+              ),
+            ],
+          );
+        });
+  }
+
+  mensajeDatosActualizados(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Editados los campos introducidos.',
+            style: TextStyle(
+              fontFamily: 'Marker',
+              color: Colors.indigo
+            )),
           );
         });
   }
