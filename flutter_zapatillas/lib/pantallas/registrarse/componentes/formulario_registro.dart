@@ -35,12 +35,14 @@ class _FormularioRegistarState extends State<FormularioRegistar> {
       });
   }
 
-  //Firebase - Función que nos hace un nuevo registro de un Nuevo Usuario
+  
+  //Firebase - Función que nos hace un nuevo registro de un Nuevo Usuario y envía email para verificación de cuenta.
   Future<void> _crearUsuario() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: pass);
+        FirebaseAuth.instance.currentUser.sendEmailVerification();
         Navigator.pushNamed(context, PantallaRegistarseCompletar.rutaNombre);
       } on FirebaseAuthException catch (e) {
         if (e.code == 'email-already-in-use') {

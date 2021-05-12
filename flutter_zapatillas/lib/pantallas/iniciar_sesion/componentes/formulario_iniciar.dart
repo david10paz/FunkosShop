@@ -36,31 +36,40 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
       });
   }
 
-  //Firebase - Comprobación Inicio Sesión
+  //Firebase - Comprobación Inicio Sesión (Email y Pass, validados y verificados)
   Future<void> _comprobarUsuario() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
-      try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: pass);
-        Navigator.pushNamed(context, PantallaPrincipal.rutaNombre);
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'user-not-found') {
-          anadirError(error: noExiste);
-          return "";
-        } else {
-          quitarError(error: noExiste);
-        }
+        try {
+          await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: pass);
+          if (!FirebaseAuth.instance.currentUser.emailVerified){
+            anadirError(error: noVerificadoUsuario);
+            return "";
+          }
+          else{    
+            Navigator.pushNamed(context, PantallaPrincipal.rutaNombre);
+          }
+          return quitarError(error: noVerificadoUsuario);
+        } on FirebaseAuthException catch (e) {
 
-        if (e.code == 'wrong-password') {
-          anadirError(error: noPass);
-          return "";
-        } else {
-          quitarError(error: noPass);
-        }
+          if (e.code == 'user-not-found') {
+            anadirError(error: noExiste);
+            return "";
+          } else {
+            quitarError(error: noExiste);
+          }
 
-        return null;
+          if (e.code == 'wrong-password') {
+            anadirError(error: noPass);
+            return "";
+          } else {
+            quitarError(error: noPass);
+          }
+          
+          return null;
+        }
       }
-    }
+    
   }
 
   @override

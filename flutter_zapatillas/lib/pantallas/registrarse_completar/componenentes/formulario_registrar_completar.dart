@@ -30,6 +30,12 @@ class _FormularioRegistrarCompletarState
   String dir;
   String provincia;
 
+  @override
+  void initState() {
+    super.initState();
+    provincia = "Madrid";
+  }
+
   void anadirError({String error}) {
     if (!errores.contains(error))
       setState(() {
@@ -45,10 +51,8 @@ class _FormularioRegistrarCompletarState
   }
 
   //Firebase - Función que nos guarda los datos principales del nuevo usuario que se encuentra registrándose.
-  Future<void> saveDatosUsuario(
-      String nombre, String direccion, String numero, String provincia) async {
-    CollectionReference users =
-        FirebaseFirestore.instance.collection("Usuarios");
+  Future<void> saveDatosUsuario(String nombre, String direccion, String numero, String provincia) async {
+    CollectionReference users = FirebaseFirestore.instance.collection("Usuarios");
     FirebaseAuth auth = FirebaseAuth.instance;
     String uid = auth.currentUser.uid.toString();
     String email = auth.currentUser.email.toString();
@@ -219,8 +223,7 @@ class _FormularioRegistrarCompletarState
           borderRadius: BorderRadius.circular(20),
         ),
         child: new DropdownButton(
-          hint: Text("Seleccione su Provincia"),
-          dropdownColor: Colors.indigo,
+          dropdownColor: Colors.lightBlue,
           elevation: 5,
           icon: Icon(
             Icons.place,

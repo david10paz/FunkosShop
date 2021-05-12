@@ -17,11 +17,21 @@ class Body extends StatelessWidget {
               image: AssetImage('assets/images/login_satisfactorio.png'),
               height: SizeConfig.pantallaAltura * 0.4,
             ),
-            SizedBox(height: SizeConfig.pantallaAltura * 0.08),
+            SizedBox(height: SizeConfig.pantallaAltura * 0.04),
             Text(
               "¡Registro Completado!",
               style: TextStyle(
-                fontSize: getProporcionalPantallaAncho(30),
+                fontSize: 26,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                decoration: TextDecoration.underline
+              ),
+            ),
+            SizedBox(height: SizeConfig.pantallaAltura * 0.02),
+            Text(
+              "Por favor, revisa tu correo para \nverificar tu cuenta en nuestra app.",
+              style: TextStyle(
+                fontSize: 12,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
