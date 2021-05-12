@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../componentes/boton.dart';
-import '../../../componentes/formulario_error.dart';
-import '../../../componentes/no_registrado.dart';
+import '../../componentes/boton.dart';
+import '../../componentes/formulario_error.dart';
+import '../iniciar_sesion/componentes/no_registrado.dart';
 
-import '../../../design/config_tam.dart';
-import '../../../design/constantes.dart';
+import '../../design/config_tam.dart';
+import '../../design/constantes.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -67,7 +67,7 @@ void anadirError({String error}) {
         });
     }
 
-  //Firebase
+  //Firebase - Mensaje Correo Restablecer Pass
   Future<void> _restablecerPass() async{
     try{
        if(_formKey.currentState.validate()){

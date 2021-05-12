@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../pass_olvidado/componentes/body.dart';
+import 'body.dart';
 
 class PantallaPassOlvidado extends StatelessWidget {
   static String rutaNombre = "/pass_olvidado";

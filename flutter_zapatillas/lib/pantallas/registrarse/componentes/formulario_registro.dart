@@ -35,7 +35,7 @@ class _FormularioRegistarState extends State<FormularioRegistar> {
       });
   }
 
-  //Firebase
+  //Firebase - Función que nos hace un nuevo registro de un Nuevo Usuario
   Future<void> _crearUsuario() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();

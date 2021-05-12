@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zapatillas/design/constantes.dart';
-import 'package:flutter_zapatillas/pantallas/principal/listaProductos/productos.dart';
+import '../../../../../design/constantes.dart';
+import '../../../productos.dart';
 
 import 'primer_plano.dart';
 
@@ -61,13 +61,16 @@ class Body extends StatelessWidget {
             text: TextSpan(
               style: TextStyle(color: colorPrincipal),
               children: [
-                TextSpan(text: "MARCA\n", style: TextStyle(fontSize: 12, fontFamily: 'Marker')),
+                TextSpan(
+                    text: "MARCA\n",
+                    style: TextStyle(fontSize: 12, fontFamily: 'Marker')),
                 TextSpan(
                   text: "${producto.coleccion} ",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline5
-                      .copyWith(fontWeight: FontWeight.bold, fontSize: 20, fontFamily: 'Marker', color: Colors.indigo),
+                  style: Theme.of(context).textTheme.headline5.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontFamily: 'Marker',
+                      color: Colors.indigo),
                 )
               ],
             ),
@@ -79,13 +82,16 @@ class Body extends StatelessWidget {
             text: TextSpan(
               style: TextStyle(color: colorPrincipal),
               children: [
-                TextSpan(text: "Tamaño\n",  style: TextStyle(fontSize: 12, fontFamily: 'Marker')),
+                TextSpan(
+                    text: "Tamaño\n",
+                    style: TextStyle(fontSize: 12, fontFamily: 'Marker')),
                 TextSpan(
                   text: "${producto.tamano} cm",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline5
-                      .copyWith(fontWeight: FontWeight.bold ,fontSize: 20, fontFamily: 'Marker', color: Colors.indigo),
+                  style: Theme.of(context).textTheme.headline5.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      fontFamily: 'Marker',
+                      color: Colors.indigo),
                 )
               ],
             ),

@@ -44,7 +44,7 @@ class _FormularioRegistrarCompletarState
       });
   }
 
-  //Firebase
+  //Firebase - Función que nos guarda los datos principales del nuevo usuario que se encuentra registrándose.
   Future<void> saveDatosUsuario(
       String nombre, String direccion, String numero, String provincia) async {
     CollectionReference users =

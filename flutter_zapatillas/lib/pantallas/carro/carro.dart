@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_zapatillas/design/constantes.dart';
-import 'package:flutter_zapatillas/pantallas/principal/listaProductos/productos.dart';
-import 'package:flutter_zapatillas/pantallas/principal/pantallas/vistaPrincipalProductos/pantalla_principal_productos.dart';
-import 'package:flutter_zapatillas/pantallas/resumen/resumen_pedido.dart';
-
+import '../../design/constantes.dart';
+import '../principal/productos.dart';
+import '../principal/pantallas/vistaPrincipalProductos/pantalla_principal_productos.dart';
+import '../resumen/resumen_pedido.dart';
 
 import '../../componentes/boton.dart';
 import '../../design/config_tam.dart';
@@ -20,7 +19,6 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
-
   _CartState(this._cart);
   final _scrollController = ScrollController();
   var _firstScroll = true;
@@ -33,8 +31,7 @@ class _CartState extends State<Cart> {
       alignment: Alignment.centerRight,
       padding: EdgeInsets.only(left: 90),
       decoration: BoxDecoration(
-        color: Colors.indigo,
-        borderRadius: BorderRadius.circular(18)),
+          color: Colors.indigo, borderRadius: BorderRadius.circular(18)),
       height: 70,
       width: 300,
       child: Row(
@@ -55,7 +52,8 @@ class _CartState extends State<Cart> {
     double gastosEnvio = 3.90;
 
     for (int i = 0; i < listaProductos.length; i++) {
-      precioProd = precioProd + listaProductos[i].precio * listaProductos[i].cantidad;
+      precioProd =
+          precioProd + listaProductos[i].precio * listaProductos[i].cantidad;
     }
     double total = precioProd + gastosEnvio;
     return total.toStringAsFixed(2);
@@ -78,8 +76,8 @@ class _CartState extends State<Cart> {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => PantallaPrincipalProductos(),
-                ),
-              );
+              ),
+            );
             setState(() {
               _cart.length;
             });
@@ -112,7 +110,8 @@ class _CartState extends State<Cart> {
                   return Column(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                        padding: const EdgeInsets.only(
+                            left: 20, top: 10, bottom: 10),
                         child: Column(
                           children: <Widget>[
                             Row(
@@ -121,30 +120,33 @@ class _CartState extends State<Cart> {
                                   width: 110,
                                   height: 110,
                                   decoration: BoxDecoration(
-                                    color: item.color,
-                                    borderRadius: BorderRadius.circular(18)),
+                                      color: item.color,
+                                      borderRadius: BorderRadius.circular(18)),
                                   child: new Image.asset(
                                       "assets/images/productos/$imagen",
                                       fit: BoxFit.contain),
                                 ),
-                                
                                 Column(
                                   children: <Widget>[
                                     Padding(
-                                    padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
-                                    child:
-                                      Text(item.titulo + "\n" + item.precio.toString() + " €",
-                                        textAlign: TextAlign.center,
-                                        style: new TextStyle(
+                                      padding: const EdgeInsets.only(
+                                          left: 20, top: 10, bottom: 10),
+                                      child: Text(
+                                          item.titulo +
+                                              "\n" +
+                                              item.precio.toString() +
+                                              " €",
+                                          textAlign: TextAlign.center,
+                                          style: new TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 16.0,
                                             fontFamily: 'Marker',
                                             color: item.color,
-                                        )
-                                      ),
+                                          )),
                                     ),
                                     Row(
-                                      mainAxisAlignment:MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: <Widget>[
                                         Container(
                                           width: 120,
@@ -161,7 +163,8 @@ class _CartState extends State<Cart> {
                                               borderRadius: BorderRadius.all(
                                                 Radius.circular(50.0),
                                               )),
-                                          margin: EdgeInsets.only(top: 20.0, left: 20),
+                                          margin: EdgeInsets.only(
+                                              top: 20.0, left: 20),
                                           child: new Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
@@ -169,7 +172,7 @@ class _CartState extends State<Cart> {
                                               IconButton(
                                                 icon: Icon(Icons.remove),
                                                 onPressed: () {
-                                                  _removeProduct(index);
+                                                  _removeCantidadProducto(index);
                                                   valorTotal(_cart);
                                                 },
                                                 color: Colors.white,
@@ -183,7 +186,7 @@ class _CartState extends State<Cart> {
                                               IconButton(
                                                 icon: Icon(Icons.add),
                                                 onPressed: () {
-                                                  _addProduct(index);
+                                                  _addCantidadProducto(index);
                                                   valorTotal(_cart);
                                                 },
                                                 color: Colors.white,
@@ -196,27 +199,27 @@ class _CartState extends State<Cart> {
                                   ],
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
-                                  child:
-                                  Column(
-                                    children: <Widget>[
-                                      IconButton(
-                                        icon: Icon(Icons.remove_shopping_cart, size: 28),
-                                        onPressed: () {
-                                          _quitarProduct(index);
-                                          valorTotal(_cart);
-                                          if (productsCarrito.isEmpty){
-                                            Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                builder: (context) => PantallaPrincipalProductos(),
-                                              ),
-                                            );
-                                          }
-                                        },
-                                        color: Colors.red,
-                                      ),
-                                    ]
-                                  ),
+                                  padding: const EdgeInsets.only(
+                                      left: 20, top: 10, bottom: 10),
+                                  child: Column(children: <Widget>[
+                                    IconButton(
+                                      icon: Icon(Icons.remove_shopping_cart,
+                                          size: 28),
+                                      onPressed: () {
+                                        _quitarProducto(index);
+                                        valorTotal(_cart);
+                                        if (productsCarrito.isEmpty) {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PantallaPrincipalProductos(),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      color: Colors.red,
+                                    ),
+                                  ]),
                                 ),
                               ],
                             ),
@@ -230,17 +233,19 @@ class _CartState extends State<Cart> {
                   );
                 },
               ),
-              SizedBox(height: getProporcionalPantallaAlto(20),),
+              SizedBox(
+                height: getProporcionalPantallaAlto(20),
+              ),
               pagoTotal(_cart),
               SizedBox(
                 width: 20.0,
               ),
               Text("Gastos de envio ya incluidos: 3,90 €",
-                style: new TextStyle(
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Marker',
-                fontSize: 14.0,
-                color: Colors.black)),
+                  style: new TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Marker',
+                      fontSize: 14.0,
+                      color: Colors.black)),
               Container(
                 height: 100,
                 width: 350,
@@ -256,27 +261,29 @@ class _CartState extends State<Cart> {
                   },
                 ),
               ),
-              SizedBox(height: getProporcionalPantallaAlto(30),),
+              SizedBox(
+                height: getProporcionalPantallaAlto(30),
+              ),
             ],
           ))),
     );
   }
 
-  _addProduct(int index) {
+  _addCantidadProducto(int index) {
     setState(() {
       _cart[index].cantidad++;
     });
   }
 
-  _removeProduct(int index) {
+  _removeCantidadProducto(int index) {
     setState(() {
-      if(_cart[index].cantidad > 1){
-          _cart[index].cantidad--;
+      if (_cart[index].cantidad > 1) {
+        _cart[index].cantidad--;
       }
     });
   }
 
-  _quitarProduct(int index) {
+  _quitarProducto(int index) {
     setState(() {
       _cart[index].cantidad = 1;
       _cart.remove(productsCarrito[index]);

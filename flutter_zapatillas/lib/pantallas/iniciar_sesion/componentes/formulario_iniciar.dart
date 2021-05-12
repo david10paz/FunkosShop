@@ -36,7 +36,7 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
       });
   }
 
-  //Firebase
+  //Firebase - Comprobación Inicio Sesión
   Future<void> _comprobarUsuario() async {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();

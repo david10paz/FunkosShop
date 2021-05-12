@@ -13,6 +13,8 @@ class Boton extends StatelessWidget {
   final String texto;
   final Function pulsar;
 
+  //Botón predefinido que utilizaremos en numerosas ocasiones
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(

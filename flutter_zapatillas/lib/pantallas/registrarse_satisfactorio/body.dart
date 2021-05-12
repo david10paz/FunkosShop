@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../componentes/boton.dart';
-import '../../iniciar_sesion/pantalla_sesion.dart';
+import '../../componentes/boton.dart';
+import '../iniciar_sesion/pantalla_sesion.dart';
 
-import '../../../design/config_tam.dart';
+import '../../design/config_tam.dart';
 
 class Body extends StatelessWidget {
   @override

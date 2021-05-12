@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'config_tam.dart';
 
+//Constantes
+
 const colorPrincipal = Color(0xFF5D4037);
 const colorSecundario = Color(0xFF979797);
 const colorTexto = Color(0xFF757575);

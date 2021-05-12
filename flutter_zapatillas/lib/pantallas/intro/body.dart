@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../componentes/boton.dart';
-import '../../../design/config_tam.dart';
-import '../../../design/constantes.dart';
-import '../../iniciar_sesion/pantalla_sesion.dart';
+import '../../componentes/boton.dart';
+import '../../design/config_tam.dart';
+import '../../design/constantes.dart';
+import '../iniciar_sesion/pantalla_sesion.dart';
 
 class Body extends StatefulWidget {
   Body({Key key}) : super(key: key);
@@ -15,12 +15,12 @@ class _BodyState extends State<Body> {
   int currentPage = 0;
   List<Map<String, String>> splashData = [
     {
-      "image": "assets/images/logo.jpg",
+      "image": "assets/images/logo1.png",
       "text": "¡BIENVENIDO A TU TIENDA DE FUNKOS EXCLUSIVOS!"
     },
     {
-      "text": "Contamos con numerosas colecciones de funkos reconocidos.",
-      "image": "assets/images/fondo.jpg"
+      "text": "Contamos con numerosas colecciones de Funkos Pop reconocidos por todo el mundo.",
+      "image": "assets/images/fondo3.jpg"
     },
     {
       "text":
@@ -109,7 +109,7 @@ class ContenidoIntro extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        SizedBox(height: getProporcionalPantallaAlto(5)),
+        SizedBox(height: getProporcionalPantallaAlto(25)),
         Text(
           "FUNKOS SHOP",
           style: TextStyle(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../pantallas/registrarse/pantalla_registrarse.dart';
+import '../../registrarse/pantalla_registrarse.dart';
 
-import '../design/config_tam.dart';
-import '../design/constantes.dart';
+import '../../../design/config_tam.dart';
+import '../../../design/constantes.dart';
 
 class NoRegistrado extends StatelessWidget {
   const NoRegistrado({

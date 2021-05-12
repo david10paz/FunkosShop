@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../design/config_tam.dart';
 
+//Definimos la manera que queremos que pinte las excepciones
+
 class ErrorFormulario extends StatelessWidget {
   const ErrorFormulario({
     Key key,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zapatillas/pantallas/principal/listaProductos/productos.dart';
+import '../../../productos.dart';
 
 class PrimerPlano extends StatelessWidget {
   const PrimerPlano({
@@ -19,44 +19,46 @@ class PrimerPlano extends StatelessWidget {
           Text(
             "FUNKOS SHOP",
             style: TextStyle(
-              fontFamily: 'Marker',
-              color: Colors.white,
-              fontSize: 16
-              ),
+                fontFamily: 'Marker', color: Colors.white, fontSize: 16),
           ),
           Text(
             producto.titulo,
-            style: Theme.of(context)
-                .textTheme
-                .headline4
-                .copyWith(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30, fontFamily: 'Marker'),
+            style: Theme.of(context).textTheme.headline4.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+                fontFamily: 'Marker'),
           ),
           Row(
             children: <Widget>[
               RichText(
                 text: TextSpan(
                   children: [
-                    TextSpan(text: "PRECIO: \n", style: TextStyle(fontFamily: 'Marker', fontSize: 16)),
+                    TextSpan(
+                        text: "PRECIO: \n",
+                        style: TextStyle(fontFamily: 'Marker', fontSize: 16)),
                     TextSpan(
                       text: "${producto.precio} €",
                       style: Theme.of(context).textTheme.headline4.copyWith(
-                          color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Marker', fontSize: 22),
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Marker',
+                          fontSize: 22),
                     ),
                   ],
                 ),
               ),
               SizedBox(width: 120),
               Expanded(
-                child: 
-                Container(
+                child: Container(
                   height: 180,
                   child: Hero(
-                  tag: "${producto.id}",
-                  child: Image.asset(
-                    "assets/images/productos/${producto.imagen}",
-                    fit: BoxFit.fill,
+                    tag: "${producto.id}",
+                    child: Image.asset(
+                      "assets/images/productos/${producto.imagen}",
+                      fit: BoxFit.fill,
+                    ),
                   ),
-                ),
                 ),
               )
             ],

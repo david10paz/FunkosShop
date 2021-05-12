@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+//Con esta clase configuramos espacios entre diversos campos
+
 class SizeConfig {
   static MediaQueryData _mediaQueryData;
   static double pantallaAncho;

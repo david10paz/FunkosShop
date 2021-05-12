@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:flutter_zapatillas/pantallas/principal/listaProductos/productos.dart';
-import 'package:flutter_zapatillas/pantallas/principal/pantallas/vistaDetalladaProducto/componentes/body.dart';
-
+import '../../productos.dart';
+import 'componentes/body.dart';
 
 class PantallaDetalladaProductos extends StatelessWidget {
   final Productos producto;

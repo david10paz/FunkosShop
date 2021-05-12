@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../componentes/no_registrado.dart';
+import 'no_registrado.dart';
 import '../../../design/config_tam.dart';
 
 import 'formulario_iniciar.dart';

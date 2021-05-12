@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'componentes/body.dart';
+import 'body.dart';
 
 class PantallaRegistrarseSatisfactorio extends StatelessWidget {
   static String rutaNombre = "/registrarse_satisfactorio";

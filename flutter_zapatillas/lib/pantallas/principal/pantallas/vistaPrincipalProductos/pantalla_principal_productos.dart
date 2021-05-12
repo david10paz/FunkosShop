@@ -1,15 +1,15 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_zapatillas/pantallas/carro/carro.dart';
-import 'package:flutter_zapatillas/pantallas/iniciar_sesion/pantalla_sesion.dart';
-import 'package:flutter_zapatillas/pantallas/principal/pantallas/vistaDetalladaProducto/pantalla_detallada_producto.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_zapatillas/pantallas/registrarse_completar/listaProvincias.dart';
+import '../../../carro/carro.dart';
+import '../../../iniciar_sesion/pantalla_sesion.dart';
+import '../vistaDetalladaProducto/pantalla_detallada_producto.dart';
 
-import '../../listaProductos/productos.dart';
+import '../../../registrarse_completar/listaProvincias.dart';
+
+import '../../productos.dart';
 
 class PantallaPrincipalProductos extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -40,27 +40,24 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    productsLista;
-    productsCarrito;
     provincia = "Madrid";
   }
 
-  //Firebase ELIMINAR1
+  //Firebase ELIMINAR1 - Eliminamos lo que es su registro en la app
   Future<void> eliminarUsuarioAuth() async {
     auth.currentUser.delete();
   }
 
-  //Firebase ELIMINAR2
+  //Firebase ELIMINAR2 - Eliminamos lo que son sus datos en la app
   Future<void> eliminarUsuarioCol() async {
-    CollectionReference users =
-        FirebaseFirestore.instance.collection("Usuarios");
+    CollectionReference users = FirebaseFirestore.instance.collection("Usuarios");
     String uid = auth.currentUser.uid.toString();
     users.doc(uid).delete();
   }
 
-  //Firebase ACTUALIZAR
+  //Firebase ACTUALIZAR - Actualizamos los datos del usuario registrado
   Future<void> actualizarUsuario(String nombre, String direccion, String numero, String provincia) async {
-    CollectionReference users = FirebaseFirestore.instance.collection("Usuarios");
+    CollectionReference users =FirebaseFirestore.instance.collection("Usuarios");
     String uid = auth.currentUser.uid.toString();
     String email = auth.currentUser.email.toString();
     users
@@ -160,8 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
             )
           ],
         ),
-        body: _cuadroProductos()
-      );
+        body: _cuadroProductos());
   }
 
   GridView _cuadroProductos() {
@@ -257,12 +253,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   ],
                 )
               ],
-            )
-          );
+            ));
       },
     );
   }
-  
+
   dialogoModificarDatos(BuildContext context) {
     return showDialog(
         context: context,
@@ -437,19 +432,27 @@ class _MyHomePageState extends State<MyHomePage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('¿Confirmas estos datos?',
-            style: TextStyle(fontFamily: 'Marker', color: Colors.indigo),),
-            content: Text(' Nombre: ${_nombreController.value.text.toString()}\n Dirección: ${_direccionController.value.text.toString()}\n Teléfono: ${_numeroController.value.text.toString()}\n Provincia: ${provincia.trim()}.',
-              style: TextStyle(fontFamily: 'Marker', ),),
+            title: Text(
+              '¿Confirmas estos datos?',
+              style: TextStyle(fontFamily: 'Marker', color: Colors.indigo),
+            ),
+            content: Text(
+              ' Nombre: ${_nombreController.value.text.toString()}\n Dirección: ${_direccionController.value.text.toString()}\n Teléfono: ${_numeroController.value.text.toString()}\n Provincia: ${provincia.trim()}.',
+              style: TextStyle(
+                fontFamily: 'Marker',
+              ),
+            ),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('No',
+                child: Text(
+                  'No',
                   style: TextStyle(
                     fontFamily: 'Marker',
-                  ),),
+                  ),
+                ),
               ),
               TextButton(
                 onPressed: () {
@@ -457,11 +460,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   submitActionActualizarUsuario(context);
                   mensajeDatosActualizados(context);
                 },
-                child: Text('Si',
-                  style: TextStyle(
-                    fontFamily: 'Marker',
-                    color: Colors.green
-                  ),),
+                child: Text(
+                  'Si',
+                  style: TextStyle(fontFamily: 'Marker', color: Colors.green),
+                ),
               ),
             ],
           );
@@ -474,15 +476,13 @@ class _MyHomePageState extends State<MyHomePage> {
         builder: (context) {
           return AlertDialog(
             title: Text('Editados los campos introducidos.',
-            style: TextStyle(
-              fontFamily: 'Marker',
-              color: Colors.indigo
-            )),
+                style: TextStyle(fontFamily: 'Marker', color: Colors.indigo)),
           );
         });
   }
 
   submitActionActualizarUsuario(BuildContext context) {
-    actualizarUsuario(_nombreController.text, _direccionController.text, _numeroController.text, provincia.trim());
+    actualizarUsuario(_nombreController.text, _direccionController.text,
+        _numeroController.text, provincia.trim());
   }
 }

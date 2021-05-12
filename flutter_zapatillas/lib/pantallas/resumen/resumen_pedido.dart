@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_zapatillas/design/config_tam.dart';
-import 'package:flutter_zapatillas/design/constantes.dart';
+import '../../design/config_tam.dart';
+import '../../design/constantes.dart';
 import '../../pantallas/registrarse_completar/listaProvincias.dart';
 import '../pago/pantalla_pago.dart';
 
@@ -25,7 +25,7 @@ class _ResumenPedidoState extends State<ResumenPedido> {
     provincia = "Madrid";
   }
 
-  //Firebase
+  //Firebase ACTUALIZAR - Actualizamos los datos del usuario registrado
   Future<void> actualizarUsuario(
       String direccion, String numero, String provincia) async {
     CollectionReference users =

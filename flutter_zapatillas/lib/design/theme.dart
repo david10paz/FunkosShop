@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'constantes.dart';
 
+//Temas
+
 ThemeData theme() {
   return ThemeData(
     scaffoldBackgroundColor: Colors.indigo,

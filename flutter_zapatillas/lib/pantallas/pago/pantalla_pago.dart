@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_credit_card/credit_card_form.dart';
 import 'package:flutter_credit_card/credit_card_model.dart';
-import 'package:flutter_zapatillas/design/config_tam.dart';
-import 'package:flutter_zapatillas/design/constantes.dart';
-import 'package:flutter_zapatillas/pantallas/fin_pedido/pantalla_fin_pedido.dart';
+import '../../design/config_tam.dart';
+import '../../design/constantes.dart';
+import '../fin_pedido/pantalla_fin_pedido.dart';
 
 class CreditCardPage extends StatefulWidget {
   @override
