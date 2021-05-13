@@ -26,10 +26,8 @@ class _ResumenPedidoState extends State<ResumenPedido> {
   }
 
   //Firebase ACTUALIZAR - Actualizamos los datos del usuario registrado
-  Future<void> actualizarUsuario(
-      String direccion, String numero, String provincia) async {
-    CollectionReference users =
-        FirebaseFirestore.instance.collection("Usuarios");
+  Future<void> actualizarUsuario(String direccion, String numero, String provincia) async {
+    CollectionReference users = FirebaseFirestore.instance.collection("Usuarios");
     String uid = auth.currentUser.uid.toString();
     users
         .doc(uid)

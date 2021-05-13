@@ -60,11 +60,11 @@ class _MyHomePageState extends State<MyHomePage> {
     CollectionReference users =FirebaseFirestore.instance.collection("Usuarios");
     String uid = auth.currentUser.uid.toString();
     String email = auth.currentUser.email.toString();
-    users
+    DocumentSnapshot ds = await FirebaseFirestore.instance.collection("Usuarios").doc(uid).get();
+    if(ds.exists){
+      users
         .doc(uid)
         .update({
-          'uid': uid,
-          'email': email,
           'nombre': nombre,
           'direccion': direccion,
           'telefono': numero,
@@ -72,6 +72,17 @@ class _MyHomePageState extends State<MyHomePage> {
         })
         .then((value) => print("Usuario modificado correctamente"))
         .catchError((error) => print("ERROR"));
+    }
+    else{
+      users.doc(uid).set({
+      'uid': uid,
+      'email': email,
+      'nombre': nombre,
+      'direccion': direccion,
+      'telefono': numero,
+      'provincia': provincia
+    });
+    }
   }
 
   @override

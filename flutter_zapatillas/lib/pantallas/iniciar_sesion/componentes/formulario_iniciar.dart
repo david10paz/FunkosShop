@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -49,6 +50,11 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
           return "";
         } else {
           Navigator.pushNamed(context, PantallaPrincipal.rutaNombre);
+          String uid = FirebaseAuth.instance.currentUser.uid.toString();
+          DocumentSnapshot ds = await FirebaseFirestore.instance.collection("Usuarios").doc(uid).get();
+          if(!ds.exists){
+            mensajeRecordarRellenarCampos(context);
+          }
         }
         return null;
       } on FirebaseAuthException catch (e) {
@@ -194,5 +200,17 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
         ),
       ),
     );
+  }
+
+  mensajeRecordarRellenarCampos(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Hemos detectado un problema',
+                style: TextStyle(fontFamily: 'Marker', color: Colors.red, fontSize: 20)),
+              content: Text("Edita tus datos personales presionando en el icono de Lápiz del menú superior, si no.. \n¡No podrás realizar tu compra despues de pasar por el carrito!."),
+          );
+        });
   }
 }
