@@ -52,7 +52,7 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
           Navigator.pushNamed(context, PantallaPrincipal.rutaNombre);
           String uid = FirebaseAuth.instance.currentUser.uid.toString();
           DocumentSnapshot ds = await FirebaseFirestore.instance.collection("Usuarios").doc(uid).get();
-          if(!ds.exists){
+          if (!ds.exists) {
             mensajeRecordarRellenarCampos(context);
           }
         }
@@ -61,7 +61,7 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
         quitarError(error: noVerificadoUsuario);
         quitarError(error: noExiste);
         quitarError(error: noPass);
-        
+
         if (e.code == 'user-not-found') {
           anadirError(error: noExiste);
           return "";
@@ -208,8 +208,10 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
         builder: (context) {
           return AlertDialog(
             title: Text('Hemos detectado un problema',
-                style: TextStyle(fontFamily: 'Marker', color: Colors.red, fontSize: 20)),
-              content: Text("Edita tus datos personales presionando en el icono de Lápiz del menú superior, si no.. \n¡No podrás realizar tu compra despues de pasar por el carrito!."),
+                style: TextStyle(
+                    fontFamily: 'Marker', color: Colors.red, fontSize: 20)),
+            content: Text(
+                "Edita tus datos personales presionando en el icono de Lápiz del menú superior, si no.. \n¡No podrás realizar tu compra despues de pasar por el carrito!."),
           );
         });
   }

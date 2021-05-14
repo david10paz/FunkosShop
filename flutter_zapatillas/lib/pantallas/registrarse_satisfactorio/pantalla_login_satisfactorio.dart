@@ -7,11 +7,10 @@ class PantallaRegistrarseSatisfactorio extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: SizedBox(),
-        title: Text("Registro Satisfactorio"),
-        automaticallyImplyLeading: false
-      ),
-      body:Body(),
+          leading: SizedBox(),
+          title: Text("Registro Satisfactorio"),
+          automaticallyImplyLeading: false),
+      body: Body(),
     );
   }
 }

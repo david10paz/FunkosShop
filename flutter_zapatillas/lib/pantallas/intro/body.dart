@@ -19,12 +19,11 @@ class _BodyState extends State<Body> {
       "text": "¡BIENVENIDO A TU TIENDA DE FUNKOS EXCLUSIVOS!"
     },
     {
-      "text": "Contamos con numerosas colecciones de Funkos Pop reconocidos por todo el mundo.",
+      "text":"Contamos con numerosas colecciones de Funkos Pop reconocidos por todo el mundo.",
       "image": "assets/images/fondo3.jpg"
     },
     {
-      "text":
-          "Ofrecemos una gran comodidad en su compra. \nComo una efectiva entrega a su domicilio",
+      "text":"Ofrecemos una gran comodidad en su compra. \nComo una efectiva entrega a su domicilio",
       "image": "assets/images/fondo2.png"
     },
   ];

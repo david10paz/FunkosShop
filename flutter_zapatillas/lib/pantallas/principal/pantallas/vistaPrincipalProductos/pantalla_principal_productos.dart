@@ -57,31 +57,29 @@ class _MyHomePageState extends State<MyHomePage> {
 
   //Firebase ACTUALIZAR - Actualizamos los datos del usuario registrado
   Future<void> actualizarUsuario(String nombre, String direccion, String numero, String provincia) async {
-    CollectionReference users =FirebaseFirestore.instance.collection("Usuarios");
+    CollectionReference users = FirebaseFirestore.instance.collection("Usuarios");
     String uid = auth.currentUser.uid.toString();
     String email = auth.currentUser.email.toString();
     DocumentSnapshot ds = await FirebaseFirestore.instance.collection("Usuarios").doc(uid).get();
-    if(ds.exists){
-      users
-        .doc(uid)
-        .update({
-          'nombre': nombre,
-          'direccion': direccion,
-          'telefono': numero,
-          'provincia': provincia
-        })
-        .then((value) => print("Usuario modificado correctamente"))
-        .catchError((error) => print("ERROR"));
-    }
-    else{
+    if (ds.exists) {
+      users.doc(uid)
+          .update({
+            'nombre': nombre,
+            'direccion': direccion,
+            'telefono': numero,
+            'provincia': provincia
+          })
+          .then((value) => print("Usuario modificado correctamente"))
+          .catchError((error) => print("ERROR"));
+    } else {
       users.doc(uid).set({
-      'uid': uid,
-      'email': email,
-      'nombre': nombre,
-      'direccion': direccion,
-      'telefono': numero,
-      'provincia': provincia
-    });
+        'uid': uid,
+        'email': email,
+        'nombre': nombre,
+        'direccion': direccion,
+        'telefono': numero,
+        'provincia': provincia
+      });
     }
   }
 

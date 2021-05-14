@@ -21,11 +21,10 @@ class Body extends StatelessWidget {
             Text(
               "¡Registro Completado!",
               style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                decoration: TextDecoration.underline
-              ),
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  decoration: TextDecoration.underline),
             ),
             SizedBox(height: SizeConfig.pantallaAltura * 0.02),
             Text(

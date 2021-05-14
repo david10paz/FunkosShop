@@ -35,7 +35,6 @@ class _FormularioRegistarState extends State<FormularioRegistar> {
       });
   }
 
-  
   //Firebase - Función que nos hace un nuevo registro de un Nuevo Usuario y envía email para verificación de cuenta.
   Future<void> _crearUsuario() async {
     if (_formKey.currentState.validate()) {

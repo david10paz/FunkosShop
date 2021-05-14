@@ -15,8 +15,7 @@ class Body extends StatelessWidget {
       width: double.infinity,
       child: SingleChildScrollView(
         child: Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: getProporcionalPantallaAncho(20)),
+          padding: EdgeInsets.symmetric(horizontal: getProporcionalPantallaAncho(20)),
           child: Column(
             children: [
               SizedBox(height: SizeConfig.pantallaAltura * 0.04),
@@ -42,50 +41,43 @@ class Body extends StatelessWidget {
   }
 }
 
-
-
 class FormularioPassOlvidado extends StatefulWidget {
   @override
   _FormularioPassOlvidadoState createState() => _FormularioPassOlvidadoState();
 }
 
 class _FormularioPassOlvidadoState extends State<FormularioPassOlvidado> {
-
-
-  
-void anadirError({String error}) {
-      if (!errores.contains(error))
-        setState(() {
-          errores.add(error);
-        });
-    }
-
-    void quitarError({String error}) {
-      if (errores.contains(error))
-        setState(() {
-          errores.remove(error);
-        });
-    }
-
-  //Firebase - Mensaje Correo Restablecer Pass
-  Future<void> _restablecerPass() async{
-    try{
-       if(_formKey.currentState.validate()){
-         _formKey.currentState.save();
-          await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-          mensajeEnviadoRecPass(context);
-    }
-    }on FirebaseAuthException catch(e){
-      if (e.code == 'user-not-found') {
-          anadirError(error: noExiste);
-          return "";
-        } else {
-          quitarError(error: noExiste);
-        }
-    }
-   
+  void anadirError({String error}) {
+    if (!errores.contains(error))
+      setState(() {
+        errores.add(error);
+      });
   }
 
+  void quitarError({String error}) {
+    if (errores.contains(error))
+      setState(() {
+        errores.remove(error);
+      });
+  }
+
+  //Firebase - Mensaje Correo Restablecer Pass
+  Future<void> _restablecerPass() async {
+    try {
+      if (_formKey.currentState.validate()) {
+        _formKey.currentState.save();
+        await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+        mensajeEnviadoRecPass(context);
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        anadirError(error: noExiste);
+        return "";
+      } else {
+        quitarError(error: noExiste);
+      }
+    }
+  }
 
   final _formKey = GlobalKey<FormState>();
   List<String> errores = [];
@@ -97,76 +89,74 @@ void anadirError({String error}) {
       child: Column(
         children: [
           TextFormField(
-          keyboardType: TextInputType.emailAddress,
-          onSaved: (newValue) => email = newValue,
-          onChanged: (value){
-            if(value.isNotEmpty && errores.contains(emailVacio)){
-              setState(() {
-                errores.remove(emailVacio);
-              });
-            }
-            else if(emailObligaciones.hasMatch(value) && errores.contains(emailError)){
-              setState(() {
-                errores.remove(emailError);
-              });
-            }
-            return null;
-          },
-          validator: (value){
-            if(value.isEmpty && !errores.contains(emailVacio)){
-              setState(() {
-                errores.add(emailVacio);
-              });
-            }
-            else if(!emailObligaciones.hasMatch(value) && !errores.contains(emailError)){
-              setState(() {
-                errores.add(emailError);
-              });
-            }
-            return null;
-          },
-          decoration: InputDecoration(
-            labelText: "E-mail",
-            hintText: "Introduzca su e-mail",
-            floatingLabelBehavior: FloatingLabelBehavior.always,
-            suffixIcon: Padding(
-              padding: EdgeInsets.fromLTRB(
-                0, 
-                getProporcionalPantallaAncho(20),
-                getProporcionalPantallaAncho(20),
-                getProporcionalPantallaAncho(20),
+            keyboardType: TextInputType.emailAddress,
+            onSaved: (newValue) => email = newValue,
+            onChanged: (value) {
+              if (value.isNotEmpty && errores.contains(emailVacio)) {
+                setState(() {
+                  errores.remove(emailVacio);
+                });
+              } else if (emailObligaciones.hasMatch(value) &&
+                  errores.contains(emailError)) {
+                setState(() {
+                  errores.remove(emailError);
+                });
+              }
+              return null;
+            },
+            validator: (value) {
+              if (value.isEmpty && !errores.contains(emailVacio)) {
+                setState(() {
+                  errores.add(emailVacio);
+                });
+              } else if (!emailObligaciones.hasMatch(value) &&
+                  !errores.contains(emailError)) {
+                setState(() {
+                  errores.add(emailError);
+                });
+              }
+              return null;
+            },
+            decoration: InputDecoration(
+              labelText: "E-mail",
+              hintText: "Introduzca su e-mail",
+              floatingLabelBehavior: FloatingLabelBehavior.always,
+              suffixIcon: Padding(
+                padding: EdgeInsets.fromLTRB(
+                  0,
+                  getProporcionalPantallaAncho(20),
+                  getProporcionalPantallaAncho(20),
+                  getProporcionalPantallaAncho(20),
+                ),
+                child: SvgPicture.asset("assets/icons/mail.svg",
+                    height: getProporcionalPantallaAncho(18)),
               ),
-              child: SvgPicture.asset(
-                "assets/icons/mail.svg", 
-                height: getProporcionalPantallaAncho(18)),
             ),
-          ),   
-        ),
-        ErrorFormulario(errores: errores),
-        SizedBox(height: 20),
-        Boton(
-          texto: "Recuperar Contraseña", 
-          pulsar: (){
-            _restablecerPass();
-        }),
-        SizedBox(height: 20),
-        NoRegistrado(),
-      ],),
+          ),
+          ErrorFormulario(errores: errores),
+          SizedBox(height: 20),
+          Boton(
+              texto: "Recuperar Contraseña",
+              pulsar: () {
+                _restablecerPass();
+              }),
+          SizedBox(height: 20),
+          NoRegistrado(),
+        ],
+      ),
     );
   }
-
 
   mensajeEnviadoRecPass(BuildContext context) {
     return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Has recibido unas instrucciones a tu correo para restablecer tu contraseña.',
-            style: TextStyle(
-              fontFamily: 'Marker',
-              fontSize: 12,
-              color: Colors.indigo
-            ),),
+            title: Text(
+              'Has recibido unas instrucciones a tu correo para restablecer tu contraseña.',
+              style: TextStyle(
+                  fontFamily: 'Marker', fontSize: 12, color: Colors.indigo),
+            ),
           );
         });
   }
