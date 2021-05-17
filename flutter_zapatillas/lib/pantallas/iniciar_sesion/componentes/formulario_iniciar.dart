@@ -126,7 +126,7 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
         if (value.isNotEmpty) {
           quitarError(error: passVacio);
         }
-        if (value.length >= 8) {
+        if (value.length >= 6) {
           quitarError(error: passCorto);
         }
         return null;
@@ -136,7 +136,7 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
           anadirError(error: passVacio);
           return "";
         }
-        if (value.length < 8) {
+        if (value.length < 6) {
           anadirError(error: passCorto);
           return "";
         }

@@ -140,7 +140,7 @@ class _FormularioRegistarState extends State<FormularioRegistar> {
         if (value.isNotEmpty) {
           quitarError(error: passVacio);
         }
-        if (value.length >= 8) {
+        if (value.length >= 6) {
           quitarError(error: passCorto);
         }
         pass = value;
@@ -151,7 +151,7 @@ class _FormularioRegistarState extends State<FormularioRegistar> {
           anadirError(error: passVacio);
           return "";
         }
-        if (value.length < 8) {
+        if (value.length < 6) {
           anadirError(error: passCorto);
           return "";
         }
