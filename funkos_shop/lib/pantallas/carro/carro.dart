@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../design/constantes.dart';
@@ -25,6 +27,7 @@ class _CartState extends State<Cart> {
   bool _enabled = false;
 
   List<Productos> _cart;
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   Container pagoTotal(List<Productos> _cart) {
     return Container(
@@ -172,7 +175,8 @@ class _CartState extends State<Cart> {
                                               IconButton(
                                                 icon: Icon(Icons.remove),
                                                 onPressed: () {
-                                                  _removeCantidadProducto(index);
+                                                  _removeCantidadProducto(
+                                                      index);
                                                   valorTotal(_cart);
                                                 },
                                                 color: Colors.white,
@@ -253,11 +257,7 @@ class _CartState extends State<Cart> {
                 child: Boton(
                   texto: "Continuar con el pago",
                   pulsar: () => {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ResumenPedido(),
-                      ),
-                    ),
+                    comprobarExistenciaDatosUsuario(),
                   },
                 ),
               ),
@@ -288,5 +288,34 @@ class _CartState extends State<Cart> {
       _cart[index].cantidad = 1;
       _cart.remove(productsCarrito[index]);
     });
+  }
+
+  //Firebase comprobación de que existen datos del usuario
+  Future<void> comprobarExistenciaDatosUsuario() async {
+    String uid = auth.currentUser.uid.toString();
+    DocumentSnapshot ds = await FirebaseFirestore.instance.collection("Usuarios").doc(uid).get();
+    if (ds.exists) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => ResumenPedido(),
+        ),
+      );
+    } else {
+      mensajeRecordarRellenarCampos(context);
+    }
+  }
+
+  mensajeRecordarRellenarCampos(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Hemos detectado un problema',
+                style: TextStyle(
+                    fontFamily: 'Marker', color: Colors.red, fontSize: 20)),
+            content: Text(
+                "Edita tus datos personales presionando en el icono de Lápiz del menú superior en la vista de los productos, si no.. \n¡No podrás realizar tu compra!."),
+          );
+        });
   }
 }

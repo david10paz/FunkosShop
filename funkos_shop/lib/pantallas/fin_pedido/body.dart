@@ -48,11 +48,19 @@ class Body extends StatelessWidget {
                                 fontSize: 20,
                                 color: Colors.white,
                               )),
+                          Text("TOTAL: ${valorTotal(productsCarrito)} €\n",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Marker',
+                                fontStyle: FontStyle.italic,
+                                fontSize: 20,
+                                color: Colors.white,
+                              )),
                           Text("Productos en Camino",
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontFamily: 'Marker',
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   color: Colors.white,
                                   decoration: TextDecoration.underline)),
                           SizedBox(height: getProporcionalPantallaAlto(10)),
@@ -132,5 +140,17 @@ class Body extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String valorTotal(List<Productos> listaProductos) {
+    double precioProd = 0.0;
+    double gastosEnvio = 3.90;
+
+    for (int i = 0; i < listaProductos.length; i++) {
+      precioProd =
+          precioProd + listaProductos[i].precio * listaProductos[i].cantidad;
+    }
+    double total = precioProd + gastosEnvio;
+    return total.toStringAsFixed(2);
   }
 }
