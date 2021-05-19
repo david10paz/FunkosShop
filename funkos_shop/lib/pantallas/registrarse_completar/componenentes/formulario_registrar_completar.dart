@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../componentes/boton.dart';
 import '../../../componentes/formulario_error.dart';
 import '../../../design/constantes.dart';
-import '../../registrarse_satisfactorio/pantalla_login_satisfactorio.dart';
+import '../../registrarse_satisfactorio/pantalla_registrarse_satisfactorio.dart';
 import '../../../pantallas/registrarse_completar/listaProvincias.dart';
 
 import '../../../design/config_tam.dart';
