@@ -314,7 +314,7 @@ class _CartState extends State<Cart> {
                 style: TextStyle(
                     fontFamily: 'Marker', color: Colors.red, fontSize: 20)),
             content: Text(
-                "Edita tus datos personales presionando en el icono con forma de 'LÁPIZ' situado en el menú superior de la vista de los productos, si no... \n¡No podrás realizar tu compra!.",
+                "Edita tus datos personales presionando en el icono con forma de 'lápiz', situado en el menú superior, de la vista de los productos, si no... \n¡No podrás continuar con tu compra!.",
                 style: TextStyle(
                   fontFamily: 'Marker',
 

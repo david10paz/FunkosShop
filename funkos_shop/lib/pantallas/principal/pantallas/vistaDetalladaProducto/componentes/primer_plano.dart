@@ -35,7 +35,7 @@ class PrimerPlano extends StatelessWidget {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                        text: "PRECIO: \n",
+                        text: "Precio: \n",
                         style: TextStyle(fontFamily: 'Marker', fontSize: 16)),
                     TextSpan(
                       text: "${producto.precio} €",

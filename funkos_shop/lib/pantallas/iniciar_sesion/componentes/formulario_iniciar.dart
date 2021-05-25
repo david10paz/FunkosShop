@@ -211,7 +211,7 @@ class _FormularioIniciarState extends State<FormularioIniciar> {
                 style: TextStyle(
                     fontFamily: 'Marker', color: Colors.red, fontSize: 20)),
             content: Text(
-                "Edita tus datos personales presionando en el icono de 'LÁPIZ' del menú superior, si no... \n¡No podrás realizar tu compra despues de pasar por el carrito!."),
+                "Edita tus datos personales presionando en el icono con forma de 'lápiz', del menú superior, si no... \n¡No podrás realizar tu compra despues de pasar por el carrito!."),
           );
         });
   }

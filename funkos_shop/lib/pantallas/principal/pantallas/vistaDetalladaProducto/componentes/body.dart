@@ -62,7 +62,7 @@ class Body extends StatelessWidget {
               style: TextStyle(color: colorPrincipal),
               children: [
                 TextSpan(
-                    text: "MARCA\n",
+                    text: "Marca\n",
                     style: TextStyle(fontSize: 12, fontFamily: 'Marker')),
                 TextSpan(
                   text: "${producto.coleccion} ",
