@@ -6,7 +6,7 @@ import 'pantallas/pass_olvidado/pantalla_pass_olvidado.dart';
 import 'pantallas/registrarse/pantalla_registrarse.dart';
 import 'pantallas/registrarse_completar/pantalla_registrarse_completar.dart';
 import 'pantallas/intro/pantalla_intro.dart';
-import 'pantallas/registrarse_satisfactorio/pantalla_login_satisfactorio.dart';
+import 'pantallas/registrarse_satisfactorio/pantalla_registrarse_satisfactorio.dart';
 
 //Rutas de la app que nos ayudarán a la navegación por ella
 
