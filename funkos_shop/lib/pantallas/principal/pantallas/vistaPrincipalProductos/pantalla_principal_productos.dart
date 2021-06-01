@@ -50,7 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   //Firebase ELIMINAR2 - Eliminamos lo que son sus datos en la app
   Future<void> eliminarUsuarioCol() async {
-    CollectionReference users = FirebaseFirestore.instance.collection("Usuarios");
+    CollectionReference users =
+        FirebaseFirestore.instance.collection("Usuarios");
     String uid = auth.currentUser.uid.toString();
     users.doc(uid).delete();
   }
@@ -63,14 +64,14 @@ class _MyHomePageState extends State<MyHomePage> {
     DocumentSnapshot ds = await FirebaseFirestore.instance.collection("Usuarios").doc(uid).get();
     if (ds.exists) {
       users.doc(uid)
-          .update({
-            'nombre': nombre,
-            'direccion': direccion,
-            'telefono': numero,
-            'provincia': provincia
-          })
-          .then((value) => print("Usuario modificado correctamente"))
-          .catchError((error) => print("ERROR"));
+        .update({
+          'nombre': nombre,
+          'direccion': direccion,
+          'telefono': numero,
+          'provincia': provincia
+        })
+        .then((value) => print("Usuario modificado correctamente"))
+        .catchError((error) => print("ERROR"));
     } else {
       users.doc(uid).set({
         'uid': uid,
@@ -323,10 +324,12 @@ class _MyHomePageState extends State<MyHomePage> {
             actions: [
               TextButton(
                 onPressed: () {
-                  if(_nombreController.text.isEmpty || _numeroController.text.isEmpty || _direccionController.text.isEmpty || provincia.isEmpty){
+                  if (_nombreController.text.isEmpty ||
+                      _numeroController.text.isEmpty ||
+                      _direccionController.text.isEmpty ||
+                      provincia.isEmpty) {
                     mensajeErrorEditarDatos(context);
-                  }
-                  else{
+                  } else {
                     mensajeConfirmarDatosActualizados(context);
                   }
                 },
@@ -435,8 +438,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Text(
                       'Cancelar',
                       style: TextStyle(
-                          fontFamily: 'Marker',
-                          fontSize: 18,
+                        fontFamily: 'Marker',
+                        fontSize: 18,
                       ),
                     ),
                   ),
@@ -506,11 +509,10 @@ class _MyHomePageState extends State<MyHomePage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Error al editar los datos del usuario.\nTODOS LOS CAMPOS SON OBLIGATORIOS.',
+            title: Text(
+                'Error al editar los datos del usuario.\nTODOS LOS CAMPOS SON OBLIGATORIOS.',
                 style: TextStyle(
-                  fontFamily: 'Marker', 
-                  color: Colors.red, 
-                  fontSize: 14)),
+                    fontFamily: 'Marker', color: Colors.red, fontSize: 14)),
           );
         });
   }

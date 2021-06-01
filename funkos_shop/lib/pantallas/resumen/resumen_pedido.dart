@@ -197,10 +197,11 @@ class _ResumenPedidoState extends State<ResumenPedido> {
             actions: [
               TextButton(
                 onPressed: () {
-                  if(_numeroController.text.isEmpty || _direccionController.text.isEmpty || provincia.isEmpty){
+                  if (_numeroController.text.isEmpty ||
+                      _direccionController.text.isEmpty ||
+                      provincia.isEmpty) {
                     mensajeErrorEditarDatos(context);
-                  }
-                  else{
+                  } else {
                     mensajeConfirmarDatosActualizados(context);
                   }
                 },
@@ -328,11 +329,10 @@ class _ResumenPedidoState extends State<ResumenPedido> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Error al editar los datos del usuario.\nTODOS LOS CAMPOS SON OBLIGATORIOS.',
+            title: Text(
+                'Error al editar los datos del usuario.\nTODOS LOS CAMPOS SON OBLIGATORIOS.',
                 style: TextStyle(
-                  fontFamily: 'Marker', 
-                  color: Colors.red, 
-                  fontSize: 14)),
+                    fontFamily: 'Marker', color: Colors.red, fontSize: 14)),
           );
         });
   }
