@@ -323,7 +323,12 @@ class _MyHomePageState extends State<MyHomePage> {
             actions: [
               TextButton(
                 onPressed: () {
-                  mensajeConfirmarDatosActualizados(context);
+                  if(_nombreController.text.isEmpty || _numeroController.text.isEmpty || _direccionController.text.isEmpty || provincia.isEmpty){
+                    mensajeErrorEditarDatos(context);
+                  }
+                  else{
+                    mensajeConfirmarDatosActualizados(context);
+                  }
                 },
                 child: Text(
                   'Actualizar',
@@ -427,8 +432,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text('Cancelar'),
-                  )
+                    child: Text(
+                      'Cancelar',
+                      style: TextStyle(
+                          fontFamily: 'Marker',
+                          fontSize: 18,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -486,6 +497,20 @@ class _MyHomePageState extends State<MyHomePage> {
           return AlertDialog(
             title: Text('Editados los campos introducidos.',
                 style: TextStyle(fontFamily: 'Marker', color: Colors.indigo)),
+          );
+        });
+  }
+
+  mensajeErrorEditarDatos(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Error al editar los datos del usuario.\nTODOS LOS CAMPOS SON OBLIGATORIOS.',
+                style: TextStyle(
+                  fontFamily: 'Marker', 
+                  color: Colors.red, 
+                  fontSize: 14)),
           );
         });
   }
