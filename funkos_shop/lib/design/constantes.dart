@@ -18,7 +18,7 @@ final cabeceraStyle = TextStyle(
 
 // Formulario errores
 final RegExp emailObligaciones =
-    RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 final RegExp tlfnoObligaciones = RegExp(r"^([0-9]){9,9}$");
 const String emailVacio = "Email vacío";
 const String emailError = "Email no admitido";
